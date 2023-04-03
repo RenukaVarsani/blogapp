@@ -1,0 +1,68 @@
+
+<table class="mt-5 table table-dark table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Role</th>
+      <th>EmailId</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of UserData">
+      <td>{{ i.name}}</td>
+      <td>{{i.role}}</td>
+      <td>{{ i.email }}</td>
+      <td>
+      <button type="button"class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="onEdit(i)">
+        Edit
+    </button>
+</td>
+<td>
+    <button (click)="deleteData(i)">Delete</button>
+</td>
+
+</tr>
+</tbody>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+              <form  [formGroup]="userDetails">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">UserName</label>
+                    <input type="text" class="form-control" formControlName="username" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter Name">
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">EmailId</label>
+                    <input type="email" formControlName="email" class="form-control"   placeholder="Enter Email" id="exampleInputPassword1">
+                </div>
+
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="updateData(i)">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</table>
+

@@ -1,0 +1,40 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"/>
+    <form [formGroup]="signUp" ng-submit="submit()"
+      name="form"  novalidate>
+<!--  -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username"
+        formControlName="username"/>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email"
+          formControlName="email"/>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password"
+            formControlName="password"/>
+
+            <form class="form-group">
+              <label for="role">Role</label>
+              <input type="text" class="form-control" name="role"
+              formControlName="role"/>
+
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+      </div>
+
+
+
+    </form>
+
+  </div>
+</div>

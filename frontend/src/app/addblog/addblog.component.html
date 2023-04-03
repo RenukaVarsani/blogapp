@@ -1,0 +1,18 @@
+<form [formGroup]="addBlog" >
+
+  <div class="form-outline mb-4">
+    <input type="text" id="form1Example1" formControlName="name" class="form-control" />
+    <label class="form-label" for="form1Example1">Name</label>
+  </div>
+
+
+  <div class="form-outline mb-4">
+    <input type="text" id="form1Example2" class="form-control" />
+    <label class="form-label" for="form1Example2" formControlName="description">Descriptation</label>
+  </div>
+
+
+
+
+  <button type="submit" class="btn btn-primary btn-block" (click)="postBlog()">Submit</button>
+</form>
