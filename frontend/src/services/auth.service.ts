@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { response } from 'express';
 import { Router } from '@angular/router';
 
-const AUTH_API = 'http://localhost:8080/blog';
+const AUTH_API = 'http://localhost:8080/users';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,13 +18,13 @@ export class AuthService {
   user: any;
   token: any;
   roles: any;
-
+  isLogin1?:boolean=false;
 
   constructor(private http: HttpClient,private router:Router) { }
 
 
   isLogin() {
-    return this.isLogin;
+    return this.isLogin1;
   }
 
   getUser() {
@@ -39,7 +38,7 @@ export class AuthService {
 //FOR USER LOGIN
   login(email: string, password: string) {
     return this.http.post<{ token: string ,user: string }>(
-      AUTH_API + 'signin',
+      AUTH_API + '/login',
       { email, password } ,
     )
     .subscribe(
@@ -47,8 +46,9 @@ export class AuthService {
         const token = response.token;
         this.token = token;
         if (token) {
-          this.isLogin = true;
+          this.isLogin1 = true;
           this.user = response.user;
+
           this.saveAuthData(token, this.user);
           this.router.navigate(["/"]);
         }
@@ -86,7 +86,7 @@ export class AuthService {
 logout()
     {
       this.token = null;
-      this.isLogin = false;
+      this.isLogin1 = false;
        this.user = null;
       this.clearAuthData();
       this.router.navigate(["/"]);
@@ -107,7 +107,7 @@ logout()
 
   private getAuthData() {
     const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem("userId");
 
     return {
       token: token,
@@ -126,9 +126,9 @@ logout()
       return true;
 
      // this.username = user.username;
+    }else{
+      return false;
     }
-
-
   }
 
 

@@ -46,11 +46,11 @@ constructor(private userservice:UsersService,private fb:FormBuilder){
   }
 
 
-  updateData(i:any){
+  updateData(){
     this.dataObj.username = this.userDetails.value.username;
     this.dataObj.email = this.userDetails.value.email;
     this.dataObj.password = this.userDetails.value.password;
-    this.userservice.updateUserData(this.dataObj,this.dataObj.i)
+    this.userservice.updateUserData(this.dataObj,this.dataObj.id)
     .subscribe(res=>{console.log(res);
       alert("update");
 

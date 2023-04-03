@@ -10,7 +10,7 @@ import { StorageService } from './../../services/storage.service';
 export class LoginComponent {
 
   form: any = {
-    username: null,
+    email: null,
     password: null
   };
 

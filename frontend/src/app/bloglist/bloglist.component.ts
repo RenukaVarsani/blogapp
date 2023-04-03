@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from './../../services/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+// import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { data } from './data.model';
 
 @Component({
@@ -30,6 +30,8 @@ export class BloglistComponent {
     private fb: FormBuilder) {
     this.service.getBlogData().subscribe((blogData: any) => {
       this.blogData = blogData;
+      console.log(blogData);
+
     });
 
     this.details = this.fb.group({

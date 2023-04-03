@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { data } from 'src/app/bloglist/data.model';
 
-const BLOG = "http://localhost:27017/api/blogs/"
-const USER = "http://localhost:27017/api/users"
+const BLOG = "http://localhost:8080/blogs/"
+const USER = "http://localhost:8080/users/"
 
 
 
@@ -47,7 +47,7 @@ postUserData(data:any){
 
 
 getBlogData(): Observable<any>{
-  return this.http.get<any>(BLOG+'myblogs')
+  return this.http.get<any>(BLOG+'myblogs' ,  { headers: new HttpHeaders({  'Access-Control-Allow-Origin':'*',})})
     .pipe(map((res:any)=>{return res;}))
 
 }

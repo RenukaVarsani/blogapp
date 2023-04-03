@@ -1,9 +1,9 @@
 import { Component,inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from 'express';
 import { UsersService } from 'src/services/users.service';
 import { AuthService } from './../../services/auth.service';
 import {data} from '../register/data.model'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',

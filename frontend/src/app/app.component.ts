@@ -15,7 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent {
 
   blogData:string | undefined
-
+  isLogin? :any
+  isAdmin?:any
   constructor(
 
     private authService: AuthService,
@@ -26,15 +27,14 @@ export class AppComponent {
     this.userService.getBlogData().subscribe((blogData: any) => {
       this.blogData = blogData; });
 
-    const isLogin= this.authService.isLogin();
-    const isAdmin = this.authService.isAdmin();
+      this.isLogin= this.authService.isLogin();
+      this.isAdmin = this.authService.isAdmin();
 
-
-   function logout(this: any){
-      this.authService.logout();
     }
 
-  }
+        logout(this: any){
+          this.authService.logout();
+        }
 }
 
 

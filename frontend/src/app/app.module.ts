@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ShowuserComponent } from './showuser/showuser.component';
+import { AddblogComponent } from './addblog/addblog.component';
+import { BloglistComponent } from './bloglist/bloglist.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 
@@ -15,6 +18,9 @@ import { ShowuserComponent } from './showuser/showuser.component';
     RegisterComponent,
     LoginComponent,
     ShowuserComponent,
+    AddblogComponent,
+    BloglistComponent,
+
 
   ],
   imports: [
@@ -22,6 +28,7 @@ import { ShowuserComponent } from './showuser/showuser.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
   ],
   providers: [],
