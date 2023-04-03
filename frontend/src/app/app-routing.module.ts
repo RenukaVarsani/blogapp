@@ -12,15 +12,15 @@ const routes: Routes = [
 
   { path: 'register', component: RegisterComponent },
 
-  { path: "", component: BloglistComponent },
+  { path: "home", component: BloglistComponent },
 
-  { path: "add", component: AddblogComponent},
+  { path: "add", component: AddblogComponent    } ,
 
   // { path: "login/resetpassword", component: ResetpasswordComponent},
 
   // {path: 'response-reset-password/:token', component: ResponseresetpasswordComponent},
 
-  {path: '**',component:RegisterComponent }
+  {path: '**',component:BloglistComponent }
 
 
 

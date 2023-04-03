@@ -39,7 +39,7 @@ export class UsersService {
 }
 
 postUserData(data:any){
-  return this.http.post<any>(USER,data)
+  return this.http.post<any>(USER + '/signup',data)
   .pipe(map((res:any)=>{return res;}))
 
 }
@@ -70,8 +70,8 @@ updateBlogData(data:any,id:number){
     .pipe(map((res:any)=>{return res;}))
 }
 
-deleteBlogData(id:number){
-  return this.http.delete<any>(BLOG+id)
+deleteBlogData(id:any){
+  return this.http.delete<any>(BLOG+ +id)
     .pipe(map((res:any)=>{return res;}))
 
 }}

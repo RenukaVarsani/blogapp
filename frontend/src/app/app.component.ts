@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { AuthService } from '../services/auth.service';
 
@@ -12,30 +12,31 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  blogData: string | undefined;
+  isLogin?: any;
+  isAdmin?: any;
 
-  blogData:string | undefined
-  isLogin? :any
-  isAdmin?:any
+
   constructor(
+    public authService: AuthService,
+    private userService: UsersService)
 
-    private authService: AuthService,
-    private userService:UsersService )
-
-    {
-
+     {
     this.userService.getBlogData().subscribe((blogData: any) => {
-      this.blogData = blogData; });
+      this.blogData = blogData;
+    });
+  }
 
-      this.isLogin= this.authService.isLogin();
-      this.isAdmin = this.authService.isAdmin();
 
-    }
+  ngOnInit(): void {
+    this.isLogin = this.authService.isLogin1;
+    this.isAdmin = this.authService.isAdmin1;
+    // console.log('variable : ',this.isAdmin,this.isLogin);
+  }
 
-        logout(this: any){
-          this.authService.logout();
-        }
+
+  logout(this: any) {
+    this.authService.logout();
+  }
 }
-
-
-

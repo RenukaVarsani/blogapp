@@ -1,7 +1,7 @@
 <div class="col-md-12">
 
 
-    <form [formGroup]="signUp" ng-submit="submit()"
+    <form [formGroup]="signUp" (ngSubmit)="submit()"
       name="form"  novalidate>
 <!--  -->
       <div class="form-group">

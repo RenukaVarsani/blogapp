@@ -1,4 +1,4 @@
-import { Component,inject } from '@angular/core';
+import { Component,inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsersService } from 'src/services/users.service';
 import { AuthService } from './../../services/auth.service';
@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
   dataObj: data = new data();
   signUp: FormGroup;
 
-  constructor(private userservice:UsersService,private router:Router,private fb:FormBuilder){
+  constructor(private userservice:UsersService,private router:Router,private fb:FormBuilder,private authservice:AuthService){
 
     this.signUp=this.fb.group({
 
@@ -25,16 +25,21 @@ export class RegisterComponent {
       password : [''],
       email : [''],
     })}
+    ngOnInit(): void {
+      debugger
+      console.log('check');
+
+    }
 
     submit(){
-        this.dataObj.username=this.signUp.value.username;
-        this.dataObj.role=this.signUp.value.role;
-        this.dataObj.password=this.signUp.value.password;
-        this.dataObj.email=this.signUp.value.email;
-        this.userservice.postUserData(this.dataObj)
-        .subscribe(res=>{console.log(res);
-          alert("added");
-          this.signUp.reset();})
+      debugger;
+      console.log('submit : ');
+        // this.dataObj.username=this.signUp.value.username;
+        // this.dataObj.role=this.signUp.value.role;
+        // this.dataObj.password=this.signUp.value.password;
+        // this.dataObj.email=this.signUp.value.email;
+        this.authservice.register( this.signUp.value.username,this.signUp.value.email,this.signUp.value.password,this.signUp.value.role)
+
          }
 
 }

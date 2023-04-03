@@ -18,14 +18,10 @@ export class AuthService {
   user: any;
   token: any;
   roles: any;
-  isLogin1?:boolean=false;
+  isLogin1:boolean=false;
+  isAdmin1:boolean=false;
 
   constructor(private http: HttpClient,private router:Router) { }
-
-
-  isLogin() {
-    return this.isLogin1;
-  }
 
   getUser() {
     return this.user;
@@ -43,6 +39,7 @@ export class AuthService {
     )
     .subscribe(
       response => {
+
         const token = response.token;
         this.token = token;
         if (token) {
@@ -50,7 +47,7 @@ export class AuthService {
           this.user = response.user;
 
           this.saveAuthData(token, this.user);
-          this.router.navigate(["/"]);
+          this.router.navigate(["/home"]);
         }
       },
       error => {
@@ -63,13 +60,16 @@ export class AuthService {
 
 
 //FOR USER SIGNUP
-  register(username: string, email: string, password: string) {
+  register(username: string, email: string, password: string,role:string) {
+    console.log('data : ',username,email,password);
+
     return this.http.post(
-      AUTH_API + 'signup',
+      AUTH_API + '/signup',
       {
         username,
         email,
         password,
+        role
       }
     ).subscribe(()=>{
       this.router.navigate(["/"]);
@@ -81,7 +81,7 @@ export class AuthService {
   }
 
 
-//GOR USER LOGOUT
+//fOR USER LOGOUT
 
 logout()
     {
@@ -92,9 +92,6 @@ logout()
       this.router.navigate(["/"]);
     }
 
-
-
-//may be userid
   private saveAuthData(token: string, user: string) {
     localStorage.setItem("token", token);
     localStorage.setItem("userId", user);
@@ -117,11 +114,18 @@ logout()
 
  isAdmin(){
 
-    if (this.isLogin()) {
+    if (this.isLogin1) {
       const user = this.getUser();
-      this.roles = user.roles;
+      this.roles = user.role;
 
-      this.isAdmin = this.roles.includes('admin');
+
+      if(this.roles.includes('admin')){
+        return true
+      }
+      else{
+        return false
+      }
+      // (this.roles.includes('admin')) ? return true : return false;
 
       return true;
 

@@ -22,15 +22,15 @@ export class LoginComponent {
   constructor(private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit(): void {
-    if (this.authService.isLogin()) {
+    if (this.authService.isLogin1) {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
     }}
 
 
   onSubmit(): void {
-    const { username, password } = this.form;
-    this.authService.login(username, password)
+    const { email, password } = this.form;
+    this.authService.login(email, password)
   }
 
   reloadPage(): void {

@@ -1,15 +1,32 @@
-<div class="row mt-5">
-  <div class="col-md-4 mb-3" *ngFor="let i of blogData ">
-    <div class="card text-center">
-      <div class="card-body">
-        <h5 class="card-title">{{ i.name }}</h5>
-        <p class="card-text">{{ i.description }}</p>
 
-       <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="isAdmin" (click)="onEdit(i)">
- Edit
-</button>
+<table class="mt-5 table table-dark table-striped">
+  <thead>
+      <tr>
+          <th>name</th>
+          <th>description</th>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
 
+  <tbody>
+      <tr *ngFor="let i of blogData">
+          <td> {{ i.name }} </td>
+          <td> {{ i.description }} </td>
+          <td>
+               <button type="button" class="btn btn-primary"  *ngIf="authService.isAdmin"
+              (click)="onEdit(i)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Edit
+              </button>
+
+          </td>
+          <td>
+              <button (click)="deleteData(id)" *ngIf="authService.isAdmin">Delete</button>
+          </td>
+      </tr>
+  </tbody>
+
+</table>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -17,7 +34,9 @@
       <div class="modal-body">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="myform bg-dark">
-            <h1 class="text-center"  *ngIf="isAdmin">Edit Details</h1>
+
+            <h1 class="text-center"  *ngIf="authService.isAdmin">Edit Details</h1>
+
             <form [formGroup]="details">
                 <div class="mb-3 mt-4">
                     <label for="exampleInputEmail1" class="form-label">Name</label>
@@ -37,8 +56,3 @@
 </div>
 
 
-<button type="submit" class="btn btn-light mt-3" (click)="deleteData(i)" *ngIf="isAdmin">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>

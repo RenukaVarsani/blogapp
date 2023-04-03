@@ -16,19 +16,24 @@ import { data } from './data.model';
 export class BloglistComponent {
 
   blogData: any;
-  i: any;
+  id: any;
+  row:any;
   userData: any;
 
   dataObj: data = new data();
   details: FormGroup;
 
 
+
   constructor(
     private service: UsersService,
-    private storageservice: StorageService,
-    private authservice:AuthService,
+    public authService:AuthService,
+    private route:ActivatedRoute,
     private fb: FormBuilder) {
-    this.service.getBlogData().subscribe((blogData: any) => {
+
+
+      this.id = this.route.snapshot.paramMap.get('id');
+      this.service.getBlogData().subscribe((blogData: any) => {
       this.blogData = blogData;
       console.log(blogData);
 
@@ -38,22 +43,25 @@ export class BloglistComponent {
       name: [''],
       description: [''],
     });
+
   }
 
-  isLogin= this.authservice.isLogin();
+  isLogin= this.authService.isLogin1;
 
-  isAdmin = this.authservice.isAdmin();
+  isAdmin = this.authService.isAdmin1;
 
 
-  deleteData(i: any) {
-    this.service.deleteBlogData(i.id).subscribe((res) => {
+
+
+  deleteData(id: any) {
+    this.service.deleteBlogData(id).subscribe((res) => {
       alert('deleted');
     });}
 
 
-  onEdit(i: any) {
-    this.details.controls['name'].setValue(i.name);
-    this.details.controls['description'].setValue(i.description);
+  onEdit(row: any) {
+    this.details.controls['name'].setValue(row.name);
+    this.details.controls['description'].setValue(row.description);
   }
 
 
