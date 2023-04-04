@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../services/storage.service';
 import { AuthService } from '../services/auth.service';
-
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from '../services/users.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { NgToastService  } from 'ng-angular-popup';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent implements OnInit {
+
+
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
+
   blogData: string | undefined;
   isLogin?: any;
   isAdmin?: any;
@@ -20,9 +25,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private userService: UsersService)
+    private userService: UsersService,
+    private toast:NgToastService){
 
-     {
     this.userService.getBlogData().subscribe((blogData: any) => {
       this.blogData = blogData;
     });
@@ -32,11 +37,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.isLogin = this.authService.isLogin1;
     this.isAdmin = this.authService.isAdmin1;
-    // console.log('variable : ',this.isAdmin,this.isLogin);
   }
 
 
   logout(this: any) {
     this.authService.logout();
+    this.toast.warning({detail:"logout",duration:5000})
   }
 }

@@ -24,7 +24,6 @@ exports.getBlogs = async (req, res) => {
 }
 
 
-
 exports.getBlogById = async (req, res) => {
     const _id = req.params.id
 
@@ -38,7 +37,6 @@ exports.getBlogById = async (req, res) => {
         res.status(500).send()
     }
 }
-
 
 
 exports.showBlog = async (req, res) => {
@@ -80,12 +78,11 @@ exports.updateBlog = async (req, res) => {
 exports.deleteBlog =  async (req, res) => {
     try {
         const blog = await Blog.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
-
         if (!blog) {
             res.status(404).send()
         }
         res.send(blog)
     } catch (e) {
         res.status(500).send()
-    }
+    }   
 }

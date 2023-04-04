@@ -59,8 +59,6 @@ userSchema.methods.genrateAuthToken = async function(){
     console.log(user);
     const token = jwt.sign({_id: user._id.toString()},'crud')
     console.log(token);
-
-    user.tokens = user.tokens.concat({token})
     await user.save()
     return token
 }

@@ -5,16 +5,17 @@ const auth = require('../middleware/auth')
 const BlogController = require('../controller/blog')
 
 
-router.get("/blogs" , BlogController.getBlogs);
+router.get('/myblogs', BlogController.showBlog); 
 
-router.post("/blogs", auth, BlogController.addBlog);
+router.get("/" , BlogController.getBlogs);
 
-router.get("/blogs/:id", auth, BlogController.getBlogById);
+router.post("/", auth, BlogController.addBlog);
 
-router.put("blogs/:id", auth, BlogController.updateBlog);
+router.get("/:id", auth, BlogController.getBlogById);
 
-router.delete("blogs/:id", auth, BlogController.deleteBlog);
+router.put("/:id", auth, BlogController.updateBlog);
 
-router.get('/myblogs', BlogController.showBlog);
+router.delete("/:id", BlogController.deleteBlog);
+
 
 module.exports = router;

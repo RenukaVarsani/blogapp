@@ -9,8 +9,7 @@ import { ShowuserComponent } from './showuser/showuser.component';
 import { AddblogComponent } from './addblog/addblog.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-
-
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     ShowuserComponent,
     AddblogComponent,
     BloglistComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -29,9 +26,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    NgToastModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

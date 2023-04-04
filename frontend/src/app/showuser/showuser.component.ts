@@ -4,6 +4,9 @@ import { UsersService } from './../../services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import {data} from '../showuser/data.model'
+import { NgToastService  } from 'ng-angular-popup';
+
+
 @Component({
   selector: 'app-showuser',
   templateUrl: './showuser.component.html',
@@ -18,7 +21,10 @@ export class ShowuserComponent {
   dataObj: data = new data();
   i: any;
 
-constructor(private userservice:UsersService,private fb:FormBuilder){
+constructor(private userservice:UsersService,
+            private fb:FormBuilder,
+            private toast:NgToastService
+            ){
 
   this.userservice.getUserData().subscribe((UserData: any) => {
     this.UserData = UserData;
@@ -35,7 +41,7 @@ constructor(private userservice:UsersService,private fb:FormBuilder){
 
   deleteData(i: any) {
     this.userservice.deleteUserData(i.id).subscribe((res) => {
-      alert('deleted');
+      this.toast.warning({detail:"delete user",duration:5000})
     });}
 
 
@@ -52,17 +58,8 @@ constructor(private userservice:UsersService,private fb:FormBuilder){
     this.dataObj.password = this.userDetails.value.password;
     this.userservice.updateUserData(this.dataObj,this.dataObj.id)
     .subscribe(res=>{console.log(res);
-      alert("update");
+      this.toast.info({detail:"update user",duration:5000})
 
     })
-
-
-
-
-
-
-}
-
-
-}
+}}
 

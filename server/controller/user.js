@@ -1,18 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-var randomstring = require("randomstring");
-const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
 
-
-// const transporter = nodemailer.createTransport(
-//   sendgridTransport({
-//     auth: {
-//       api_key:'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'
-//     }
-//   })
-// );
 
 
  exports.login=async (req, res) => {

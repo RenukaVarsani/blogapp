@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { data } from 'src/app/bloglist/data.model';
+import { ActivatedRoute } from '@angular/router';
 
 const BLOG = "http://localhost:8080/blogs/"
 const USER = "http://localhost:8080/users/"
@@ -12,7 +13,8 @@ const USER = "http://localhost:8080/users/"
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+
+export class UsersService  {
 
   constructor(private http: HttpClient) { }
 
@@ -71,7 +73,7 @@ updateBlogData(data:any,id:number){
 }
 
 deleteBlogData(id:any){
-  return this.http.delete<any>(BLOG+ +id)
+  return this.http.delete<any>(BLOG+id)
     .pipe(map((res:any)=>{return res;}))
 
 }}

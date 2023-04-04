@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
       password : [''],
       email : [''],
     })}
+
     ngOnInit(): void {
       debugger
       console.log('check');
