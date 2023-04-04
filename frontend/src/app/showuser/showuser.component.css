@@ -1,0 +1,31 @@
+#demo{
+/* Created with https://www.css-gradient.com */
+background: #555756;
+background: -webkit-linear-gradient(top left, #555756, #93958E);
+background: -moz-linear-gradient(top left, #555756, #93958E);
+background: linear-gradient(to bottom right, #555756, #93958E);
+}
+
+#edit{
+  /* Created with https://www.css-gradient.com */
+background: #010101;
+background: -webkit-linear-gradient(top left, #010101, #595A58);
+background: -moz-linear-gradient(top left, #010101, #595A58);
+background: linear-gradient(to bottom right, #010101, #595A58);
+}
+
+#delete{
+/* Created with https://www.css-gradient.com */
+background: #CCD4CE;
+background: -webkit-linear-gradient(top left, #CCD4CE, #FF2307);
+background: -moz-linear-gradient(top left, #CCD4CE, #FF2307);
+background: linear-gradient(to bottom right, #CCD4CE, #FF2307);
+ }
+
+ #user{
+  margin-right: 63vh;
+ }
+
+ #email{
+  margin-right: 68vh;
+ }

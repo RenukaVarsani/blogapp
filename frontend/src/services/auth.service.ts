@@ -17,8 +17,9 @@ export class AuthService  {
   user: any
   token: any;
   roles: any;
-  isLogin1: boolean = false;
+  isUser: boolean = false;
   isAdmin1: boolean = false;
+  isLogin1 : boolean = false
 
   constructor(private http: HttpClient, private router: Router) {}
   getUser() {
@@ -26,14 +27,22 @@ export class AuthService  {
   }
 
   isAdmin() {
-    if (this.isLogin1 === true) {
-      this.user = localStorage.getItem('user');
-      if (JSON.parse(this.user).role === 'admin') {
-        this.isAdmin1 = true;
-      } else {
-        this.isAdmin1 = false;
-      }
+    this.user = localStorage.getItem('user');
+    // console.log(JSON.parse(this.user).role);
+    if (JSON.parse(this.user).role === 'admin') {
+      this.isAdmin1 = true
+      this.isLogin1 = true
     }
+    else if(JSON.parse(this.user).role === 'user'){
+      this.isAdmin1 = false
+      this.isLogin1 = true
+    }
+    else{
+      console.log("Incorret Details");
+      this.isAdmin1 = false
+      this.isLogin1 = false
+    }
+
   }
 
   getToken() {
@@ -52,9 +61,10 @@ export class AuthService  {
           const token = response.token;
           this.token = token;
           if (token) {
-            this.isLogin1 = true;
+
             this.user = response.user;
             this.saveAuthData(token, this.user);
+            this.isAdmin()
             this.router.navigate(['/home']);
           }
         },

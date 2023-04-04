@@ -9,12 +9,12 @@ router.post("/login", UserController.login);
 
 router.post("/logout",auth, UserController.logout);
 
-router.post("/getdata",auth, UserController.getUserData);
+router.get("/getdata", UserController.getUserData);
 
 router.get('/me', auth, UserController.getUser);
 
-router.patch('/me', auth, UserController.updateUser) ;
+router.patch('/', auth, UserController.updateUser) ;
 
-router.delete('/me', auth, UserController.deleteUser);
+router.delete('/', auth, UserController.deleteUser);
 
-module.exports = router;    
+module.exports = router;        

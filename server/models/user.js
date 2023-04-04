@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const session = require('express-session')
+
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -48,12 +48,6 @@ const userSchema = new mongoose.Schema({
 )
 
 
-userSchema.virtual('blogs', {
-    ref: 'Blog',
-    localField: '_id',
-    foreignField: 'owner'
-})
-
 userSchema.methods.genrateAuthToken = async function(){
     const user = this 
     console.log(user);
@@ -85,5 +79,7 @@ userSchema.pre('save', async function (next) {
   }
   next()
 })
+
 const User = mongoose.model('User', userSchema)
 module.exports = User
+

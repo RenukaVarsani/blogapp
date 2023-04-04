@@ -29,7 +29,7 @@ export class UsersService  {
     return this.http.get(USER + 'me', { responseType: 'text' });
   }
 
-  updateUserData(data:any,id:number){
+    updateUserData(data:any,id:number){
     return this.http.put<any>(USER+ id,data)
       .pipe(map((res:any)=>{return res;}))
   }
@@ -45,6 +45,7 @@ postUserData(data:any){
   .pipe(map((res:any)=>{return res;}))
 
 }
+
 /* blog http method */
 
 
@@ -61,14 +62,14 @@ postBlogData(data:any){
 
 }
 
-getBlogDataById(id:number){
-  return this.http.get<any>(BLOG)
-    .pipe(map((res:any)=>{return res;}))
+// getBlogDataById(id:number){
+//   return this.http.get<any>(BLOG)
+//     .pipe(map((res:any)=>{return res;}))
 
-}
+// }
 
 updateBlogData(data:any,id:number){
-  return this.http.put<any>(BLOG + id,data)
+  return this.http.patch<any>(BLOG + id,data)
     .pipe(map((res:any)=>{return res;}))
 }
 

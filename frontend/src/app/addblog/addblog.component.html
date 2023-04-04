@@ -1,18 +1,20 @@
-<div>
+<div class="col-md-6">
   <form [formGroup]="addBlog" (ngSubmit)="postBlog()">
 
-    <div class="form-outline mb-4">
+    <div class="form-outline mt-4">
       <input type="text" id="form1Example1" formControlName="name" class="form-control" />
       <label class="form-label" for="form1Example1">Name</label>
     </div>
 
 
-    <div class="form-outline mb-4">
+    <div class="form-outline mt-4">
       <input type="text" id="form1Example2" class="form-control" />
-      <label class="form-label" for="form1Example2" formControlName="description">Descriptation</label>
+      <label class="form-label" for="form1Example2" formControlName="description">Description</label>
     </div>
 
+    <div class="form-group text-center mt-3 ">
+    <button type="submit" class="btn btn-secondary ">Submit</button>
+    </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
   </form>
 </div>

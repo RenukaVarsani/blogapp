@@ -4,7 +4,7 @@ const router = new express.Router()
 
 exports.addBlog = async (req, res) => {
 
-    const blog = new Blog({...req.body,owner:req.user._id}  )
+    const blog = new Blog({...req.body}  )
     try {
         await blog.save()
         res.status(201).send(blog)
@@ -15,8 +15,8 @@ exports.addBlog = async (req, res) => {
 
 exports.getBlogs = async (req, res) => {
     try {
-        await req.user.populate('blogs')
-        res.send(req.user.blogs)
+       const blogs =  await Blog.find('blogs')
+        res.send(blogs)
     } catch (e) {
         console.log(e.message);
         res.status(500).send()
@@ -28,7 +28,7 @@ exports.getBlogById = async (req, res) => {
     const _id = req.params.id
 
     try {
-        const blog = await Blog.findOne({ _id, owner: req.user._id })
+        const blog = await Blog.findOne({ _id})
         if (!blog) {
             return res.status(404).send()
         }
@@ -60,7 +60,7 @@ exports.updateBlog = async (req, res) => {
     }
 
     try {
-        const blog = await Blog.findOne({ _id: req.params.id, owner: req.user._id})
+        const blog = await Blog.findOne( req.params.id )
 
         updates.forEach((update) => blog[update] = req.body[update])
         await blog.save()
@@ -77,7 +77,9 @@ exports.updateBlog = async (req, res) => {
 
 exports.deleteBlog =  async (req, res) => {
     try {
-        const blog = await Blog.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
+        console.log(req.params.id);
+        const blog = await Blog.findByIdAndDelete(req.params.id)
+
         if (!blog) {
             res.status(404).send()
         }

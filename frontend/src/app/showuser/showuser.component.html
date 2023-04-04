@@ -1,68 +1,62 @@
-
-<table class="mt-5 table table-dark table-striped">
+<table class="mt-5 text-center table" id="demo">
   <thead>
     <tr>
       <th>User</th>
       <th>Role</th>
       <th>EmailId</th>
+      <th colspan="2">Actions</th>
+
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let i of UserData">
-      <td>{{ i.name}}</td>
-      <td>{{i.role}}</td>
+      <td>{{ i.username }}</td>
+      <td>{{ i.role }}</td>
       <td>{{ i.email }}</td>
       <td>
-      <button type="button"class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="onEdit(i)">
-        Edit
-    </button>
-</td>
-<td>
-    <button (click)="deleteData(i)">Delete</button>
-</td>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" id="edit" data-bs-target="#exampleModal"
+          (click)="onEdit(i)">
+          <i class="fa fa-edit"></i>
+          Edit
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Details</h5>
+                  <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
 
-</tr>
-</tbody>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-              <form  [formGroup]="userDetails">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">UserName</label>
-                    <input type="text" class="form-control" formControlName="username" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Enter Name">
-
+                  <form [formGroup]="userDetails">
+                    <div class="mb-3 mt-2 form-group">
+                      <label for="exampleInputEmail1" class="form-label " id="user">Username:</label>
+                      <input type="text" class="form-control" formControlName="name" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label" id="email">Email:</label>
+                      <input type="text" class="form-control" formControlName="email" id="exampleInputPassword1" />
+                    </div>
+                    <button type="submit" class="btn btn-secondary mt-3" (click)="updateData(i)">
+                      Save
+                    </button>
+                  </form>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">EmailId</label>
-                    <input type="email" formControlName="email" class="form-control"   placeholder="Enter Email" id="exampleInputPassword1">
-                </div>
-
-
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+              </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="updateData()">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
+          </div>
 
+      </td>
+      <td>
+        <button (click)="deleteData(i)" id="delete" class="btn">
+          <i class="fa fa-trash-o"></i>
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
 
-
+  <!-- Modal -->
 </table>
-

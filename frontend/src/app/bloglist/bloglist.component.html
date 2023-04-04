@@ -1,10 +1,10 @@
-<table class="mt-5 table table-dark table-striped">
+<table class="mt-5 table" id="demo">
   <thead>
     <tr>
-      <th>name</th>
-      <th>description</th>
-      <th></th>
-      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+
     </tr>
   </thead>
 
@@ -13,75 +13,48 @@
       <td>{{ i.name }}</td>
       <td>{{ i.description }}</td>
       <td>
-        <button
-          type="button"
-          class="btn btn-primary"
-          *ngIf="authService.isAdmin1"
-          (click)="onEdit(i)"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
+        <button type="button" class="btn btn-primary" *ngIf="authService.isAdmin1" (click)="onEdit(i)"
+          data-bs-toggle="modal" id="edit" data-bs-target="#exampleModal"><i class="fa fa-edit"></i>
           Edit
         </button>
-        <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-              <div class="myform bg-dark">
-                <h1 class="text-center" *ngIf="authService.isAdmin1">
-                  Edit Details
-                </h1>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
 
-                <form [formGroup]="details">
-                  <div class="mb-3 mt-4">
-                    <label for="exampleInputEmail1" class="form-label">Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="name"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Description</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="description"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    class="btn btn-light mt-3"
-                    (click)="updateData(i)"
-                  >
-                    Save
-                  </button>
-                </form>
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Details</h5>
+                  <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+
+                <div class="myform">
+
+
+                  <form [formGroup]="details">
+                    <div class="mb-3 mt-4">
+                      <label for="exampleInputEmail1" class="form-label">Name</label>
+                      <input type="text" class="form-control" formControlName="name" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Description</label>
+                      <input type="text" class="form-control" formControlName="description"
+                        id="exampleInputPassword1" />
+                    </div>
+                    <button type="submit" class="btn btn-secondary mt-3" (click)="updateData(i)">
+                      Save
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </td>
       <td>
-        <button (click)="deleteData(i._id)" *ngIf="authService.isAdmin1">
+        <button (click)="deleteData(i._id)" id="delete" class="btn" *ngIf="authService.isAdmin1">
+          <i class="fa fa-trash-o"></i>
           Delete
         </button>
       </td>

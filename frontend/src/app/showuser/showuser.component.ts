@@ -33,30 +33,28 @@ constructor(private userservice:UsersService,
 
   this.userDetails=this.fb.group({
 
-    username : [''],
+    name : [''],
     email : [''],
     password : ['']
 
   })}
 
   deleteData(i: any) {
-    this.userservice.deleteUserData(i.id).subscribe((res) => {
+    this.userservice.deleteUserData(i._id).subscribe((res) => {
       this.toast.warning({detail:"delete user",duration:5000})
     });}
 
 
   onEdit(i: any) {
-    this.userDetails.controls['username'].setValue(this.i.name);
-    this.userDetails.controls['email'].setValue(this.i.name);
-    this.userDetails.controls['password'].setValue(this.i.password);
+    this.userDetails.controls['name'].setValue(i.username);
+    this.userDetails.controls['email'].setValue(i.email);
   }
 
 
-  updateData(){
+  updateData(user:any){
     this.dataObj.username = this.userDetails.value.username;
     this.dataObj.email = this.userDetails.value.email;
-    this.dataObj.password = this.userDetails.value.password;
-    this.userservice.updateUserData(this.dataObj,this.dataObj.id)
+    this.userservice.updateUserData(this.dataObj,user._id)
     .subscribe(res=>{console.log(res);
       this.toast.info({detail:"update user",duration:5000})
 
