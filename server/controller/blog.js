@@ -4,8 +4,8 @@ const router = new express.Router()
 
 exports.addBlog = async (req, res) => {
     try {
-        console.log(req.body);
-        const blog = new Blog(req.body)
+
+        const blog = new Blog(req.body) 
         const data = await blog.save()
         res.status(201).send(data)
     } catch (e) {

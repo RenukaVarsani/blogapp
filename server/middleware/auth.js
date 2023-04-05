@@ -17,9 +17,12 @@ const auth = async (req, res, next) => {
     req.token = token;
     req.user = user;
 
-    if (user.role === "admin") {
+    if (user.role === "admin" ) {
       next();
     } 
+    else if(user.role === "writer" ){
+      res.status(200).send({message:"you can write blogs"})
+    }
     else {
       res.status(403).send({ error: "Can`t access to this route" });
     }

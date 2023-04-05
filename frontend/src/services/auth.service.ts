@@ -22,7 +22,8 @@ export class AuthService  {
   roles: any;
   isUser: boolean = false;
   isAdmin1: boolean = false;
-  isLogin1 : boolean = false
+  isLogin1 : boolean = false;
+  isWriter1 : boolean=false;
 
   constructor(private http: HttpClient, private router: Router,  private Toast:ToastrService) {}
 
@@ -33,17 +34,29 @@ export class AuthService  {
   isAdmin() {
     this.user = localStorage.getItem('user');
     if (JSON.parse(this.user).role === 'admin') {
-      this.isAdmin1 = true
-      this.isLogin1 = true
+      this.isAdmin1 = true;
+      this.isLogin1 = true;
+      this.isWriter1 =false;
+
     }
     else if(JSON.parse(this.user).role === 'user'){
-      this.isAdmin1 = false
-      this.isLogin1 = true
+      this.isAdmin1 = false;
+      this.isLogin1 = true;
+      this.isWriter1 =false;
+
+    }
+    else if(JSON.parse(this.user).role === 'writer'){
+      this.isAdmin1 = false;
+      this.isLogin1 = true;
+      this.isWriter1 =true;
+
     }
     else{
       console.log("Incorret Details");
-      this.isAdmin1 = false
-      this.isLogin1 = false
+      this.isAdmin1 = false;
+      this.isLogin1 = false;
+      this.isWriter1 =false;
+
     }
 
   }

@@ -32,9 +32,6 @@ export class RegisterComponent implements OnInit {
     })}
 
     ngOnInit(): void {
-
-      console.log('check');
-
     }
 
     submit(){

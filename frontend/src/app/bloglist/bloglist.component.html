@@ -13,13 +13,13 @@
       <td>{{ i.name }}</td>
       <td>{{ i.description }}</td>
       <td>
-        <button type="button" class="btn btn-primary" *ngIf="authService.isAdmin1" (click)="onEdit(i)"
+        <button type="button" class="btn btn-primary" *ngIf="authService.isAdmin1 || authService.isWriter1" (click)="onEdit(i)"
           data-bs-toggle="modal" id="edit" data-bs-target="#exampleModal"><i class="fa fa-edit"></i>
           Edit
         </button>
       </td>
       <td>
-        <button (click)="deleteData(i._id)" id="delete" class="btn" *ngIf="authService.isAdmin1">
+        <button (click)="deleteData(i._id)" id="delete" class="btn" *ngIf="authService.isAdmin1 || authService.isWriter1">
           <i class="fa fa-trash-o"></i>
           Delete
         </button>
