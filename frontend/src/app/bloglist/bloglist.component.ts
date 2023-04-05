@@ -6,7 +6,7 @@ import { StorageService } from '../../services/storage.service';
 import { AuthService } from './../../services/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 import { data } from './data.model';
-import { NgToastService  } from 'ng-angular-popup';
+import {  ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bloglist',
@@ -16,7 +16,8 @@ import { NgToastService  } from 'ng-angular-popup';
 export class BloglistComponent implements OnInit{
 
   blogData: any;
-  id: any;
+  blogId: any;
+  id :any
   row:any;
   userData: any;
 
@@ -29,8 +30,8 @@ export class BloglistComponent implements OnInit{
     private service: UsersService,
     public authService:AuthService,
     private route:ActivatedRoute,
-    private toast:NgToastService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private Toast:ToastrService) {
 
 
       this.id = this.route.snapshot.paramMap.get('_id');
@@ -60,25 +61,34 @@ export class BloglistComponent implements OnInit{
 
   deleteData(id: any) {
     this.service.deleteBlogData(id).subscribe((res) => {
-   this.toast.warning({detail:"delete blog ",duration:5000})
+      this.Toast.error('','Data is deleted' ,{
+        timeOut: 1000,
+      });
+
+
+
     });}
 
 
   onEdit(i: any) {
     this.details.controls['name'].setValue(i.name);
     this.details.controls['description'].setValue(i.description);
+    this.blogId = i._id
   }
 
 
-  updateData(id:any){
-    this.dataObj.name = this.details.value.name;
-    console.log(id);
-    this.dataObj.description = this.details.value.description;
-    this.service.updateBlogData(this.dataObj,id._id)
-    .subscribe(res=>{console.log(res);
-      this.toast.info({detail:"update blog ",duration:5000})
 
-    })
+  updateData(){
+    console.log(this.blogId);
+
+    this.dataObj.name = this.details.value.name;
+    // console.log(id);
+    this.dataObj.description = this.details.value.description;
+    this.service.updateBlogData(this.dataObj,this.blogId).subscribe()
+    this.Toast.info('','Your data is updated' ,{
+      timeOut: 1000,
+    });
+
 
   }
 

@@ -9,7 +9,9 @@ import { ShowuserComponent } from './showuser/showuser.component';
 import { AddblogComponent } from './addblog/addblog.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { NgToastModule } from 'ng-angular-popup';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -25,8 +27,9 @@ import { NgToastModule } from 'ng-angular-popup';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    NgToastModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 const AUTH_API = 'http://localhost:8080/users';
 
@@ -13,7 +14,9 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService  {
+
   user: any
   token: any;
   roles: any;
@@ -21,14 +24,14 @@ export class AuthService  {
   isAdmin1: boolean = false;
   isLogin1 : boolean = false
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,  private Toast:ToastrService) {}
+
   getUser() {
     return this.user;
   }
 
   isAdmin() {
     this.user = localStorage.getItem('user');
-    // console.log(JSON.parse(this.user).role);
     if (JSON.parse(this.user).role === 'admin') {
       this.isAdmin1 = true
       this.isLogin1 = true
@@ -65,6 +68,9 @@ export class AuthService  {
             this.user = response.user;
             this.saveAuthData(token, this.user);
             this.isAdmin()
+            this.Toast.info('','You are login!' ,{
+              timeOut: 1000,
+            });
             this.router.navigate(['/home']);
           }
         },
@@ -87,6 +93,9 @@ export class AuthService  {
       })
       .subscribe(
         () => {
+          this.Toast.info('','You are Registered!' ,{
+            timeOut: 1000,
+          });
           this.router.navigate(['/']);
         },
         (error) => {
@@ -102,6 +111,10 @@ export class AuthService  {
     this.isLogin1 = false;
     this.user = null;
     this.clearAuthData();
+
+    this.Toast.error('','You are LoggedOut!' ,{
+      timeOut: 1000,
+    });
     this.router.navigate(['/']);
   }
 

@@ -17,40 +17,6 @@
           data-bs-toggle="modal" id="edit" data-bs-target="#exampleModal"><i class="fa fa-edit"></i>
           Edit
         </button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Details</h5>
-                  <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-
-              <div class="modal-body">
-
-                <div class="myform">
-
-
-                  <form [formGroup]="details">
-                    <div class="mb-3 mt-4">
-                      <label for="exampleInputEmail1" class="form-label">Name</label>
-                      <input type="text" class="form-control" formControlName="name" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" />
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Description</label>
-                      <input type="text" class="form-control" formControlName="description"
-                        id="exampleInputPassword1" />
-                    </div>
-                    <button type="submit" class="btn btn-secondary mt-3" (click)="updateData(i)">
-                      Save
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </td>
       <td>
         <button (click)="deleteData(i._id)" id="delete" class="btn" *ngIf="authService.isAdmin1">
@@ -63,3 +29,34 @@
 
 </table>
 <!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Details</h5>
+          <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="myform">
+          <form [formGroup]="details" (ngSubmit)="updateData()">
+            <div class="mb-3 mt-4">
+              <label for="exampleInputEmail1" class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name" id="exampleInputEmail1"
+                aria-describedby="emailHelp" />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Description</label>
+              <input type="text" class="form-control" formControlName="description"
+                id="exampleInputPassword1" />
+            </div>
+            <button type="submit" class="btn btn-secondary mt-3"  data-bs-dismiss="modal">
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,11 +3,11 @@ const Blog = require('../models/blog')
 const router = new express.Router()
 
 exports.addBlog = async (req, res) => {
-
-    const blog = new Blog({...req.body}  )
     try {
-        await blog.save()
-        res.status(201).send(blog)
+        console.log(req.body);
+        const blog = new Blog(req.body)
+        const data = await blog.save()
+        res.status(201).send(data)
     } catch (e) {
         res.status(400).send(e)
     }
@@ -51,25 +51,10 @@ exports.showBlog = async (req, res) => {
 
 exports.updateBlog = async (req, res) => {
 
-    const updates = Object.keys(req.body)
-    const allowedUpdates = ['description', 'name']
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invalid updates!' })
-    }
-
     try {
-        const blog = await Blog.findOne( req.params.id )
-
-        updates.forEach((update) => blog[update] = req.body[update])
+        const blog = await Blog.findByIdAndUpdate( req.params.id , req.body)
         await blog.save()
-
-        if (!blog) {
-            return res.status(404).send()
-        }
-
-        res.send(blog)
+        res.status(200).send(blog)
     } catch (e) {
         res.status(400).send(e)
     }

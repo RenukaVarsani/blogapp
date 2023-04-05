@@ -13,8 +13,8 @@ router.get("/getdata", UserController.getUserData);
 
 router.get('/me', auth, UserController.getUser);
 
-router.patch('/', auth, UserController.updateUser) ;
+router.patch('/:id', UserController.updateUser) ;
 
-router.delete('/', auth, UserController.deleteUser);
+router.delete('/:id', UserController.deleteUser);
 
 module.exports = router;        

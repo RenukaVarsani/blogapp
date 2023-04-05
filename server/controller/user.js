@@ -47,7 +47,6 @@ exports.createUser = async (req, res) => {
 
 exports.getUserData= async (req, res) => {
   try {
-
       const users = await User.find({})
       res.send(users)
 
@@ -55,7 +54,6 @@ exports.getUserData= async (req, res) => {
      { 
         console.log(e.msg)
       res.status(400).send(e)
-  
   }
 }
 
@@ -64,18 +62,12 @@ exports.getUser =  async (req, res) => {
 }
 
 exports.updateUser = async (req, res) => {
-    const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'email']
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invalid updates!' })
-    }
-
+   
     try {
-        updates.forEach((update) => req.user[update] = req.body[update])
-        await req.user.save()
-        res.send(req.user)
+
+        console.log(req.body);
+        const user = await User.findByIdAndUpdate( req.params.id , req.body)
+        res.status(200).send(user)
     } catch (e) {
         res.status(400).send(e)
     }
@@ -83,13 +75,15 @@ exports.updateUser = async (req, res) => {
 
 
 
+
 exports.deleteUser =  async (req, res) => {
     try {
-        await req.user.remove()
-        res.send(req.user)
+        console.log(req.params.id);
+        const user = await User.findByIdAndDelete(req.params.id)
+        res.status(200).send(user)
     } catch (e) {
         res.status(500).send()
-    } 
+    }   
 }
 
 // exports.postReset = async(req, res) => {

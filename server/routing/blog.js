@@ -1,7 +1,7 @@
 const express = require('express')
 const Blog = require('../models/blog')
 const router = express.Router()
-const auth = require('../middleware/auth')
+// const auth = require('../middleware/auth')
 const BlogController = require('../controller/blog')
 
 
@@ -9,7 +9,7 @@ router.get('/myblogs', BlogController.showBlog);
 
 // router.get("/" , BlogController.getBlogs);
 
-router.post("/", BlogController.addBlog);
+router.post("", BlogController.addBlog);
 
 //router.get("/:id", auth, BlogController.getBlogById);
 

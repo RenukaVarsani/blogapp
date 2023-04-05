@@ -30,7 +30,7 @@ export class UsersService  {
   }
 
     updateUserData(data:any,id:number){
-    return this.http.put<any>(USER+ id,data)
+    return this.http.patch<any>(USER+ id,data)
       .pipe(map((res:any)=>{return res;}))
   }
 
@@ -69,7 +69,7 @@ postBlogData(data:any){
 // }
 
 updateBlogData(data:any,id:number){
-  return this.http.patch<any>(BLOG + id,data)
+  return this.http.put<any>(BLOG + id,data)
     .pipe(map((res:any)=>{return res;}))
 }
 

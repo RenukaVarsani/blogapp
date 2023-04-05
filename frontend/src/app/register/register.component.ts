@@ -4,6 +4,7 @@ import { UsersService } from 'src/services/users.service';
 import { AuthService } from './../../services/auth.service';
 import {data} from '../register/data.model'
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,11 @@ export class RegisterComponent implements OnInit {
   dataObj: data = new data();
   signUp: FormGroup;
 
-  constructor(private userservice:UsersService,private router:Router,private fb:FormBuilder,private authservice:AuthService){
+  constructor(private userservice:UsersService,
+    private router:Router,
+    private fb:FormBuilder,
+    private authservice:AuthService,
+    private toast:NgToastService){
 
     this.signUp=this.fb.group({
 
@@ -27,19 +32,18 @@ export class RegisterComponent implements OnInit {
     })}
 
     ngOnInit(): void {
-      debugger
+
       console.log('check');
 
     }
 
     submit(){
-      debugger;
+
       console.log('submit : ');
-        // this.dataObj.username=this.signUp.value.username;
-        // this.dataObj.role=this.signUp.value.role;
-        // this.dataObj.password=this.signUp.value.password;
-        // this.dataObj.email=this.signUp.value.email;
-        this.authservice.register( this.signUp.value.username,this.signUp.value.email,this.signUp.value.password,this.signUp.value.role)
+        this.authservice.register( this.signUp.value.username,
+          this.signUp.value.email,
+          this.signUp.value.password,
+          this.signUp.value.role);
 
          }
 

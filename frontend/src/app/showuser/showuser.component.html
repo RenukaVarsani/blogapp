@@ -27,8 +27,6 @@
                   <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-
-
                   <form [formGroup]="userDetails">
                     <div class="mb-3 mt-2 form-group">
                       <label for="exampleInputEmail1" class="form-label " id="user">Username:</label>
@@ -39,7 +37,7 @@
                       <label for="exampleInputPassword1" class="form-label" id="email">Email:</label>
                       <input type="text" class="form-control" formControlName="email" id="exampleInputPassword1" />
                     </div>
-                    <button type="submit" class="btn btn-secondary mt-3" (click)="updateData(i)">
+                    <button type="submit" class="btn btn-secondary mt-3"  data-bs-dismiss="modal" (click)="updateData()">
                       Save
                     </button>
                   </form>
@@ -58,5 +56,4 @@
     </tr>
   </tbody>
 
-  <!-- Modal -->
 </table>
