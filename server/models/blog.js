@@ -4,12 +4,16 @@ const blog =  mongoose.model('Blog',{
 
     name: {
         type: String,
-        required: true
+       
     },
     description: {
         type: String,
-        required: true
+       
     },
+    image:{
+        type:String,
+        
+    }   
 
 })
 

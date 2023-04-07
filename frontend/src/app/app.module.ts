@@ -11,8 +11,9 @@ import { BloglistComponent } from './bloglist/bloglist.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BlogdataComponent } from './blogdata/blogdata.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ShowuserComponent,
     AddblogComponent,
     BloglistComponent,
+    BlogdataComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,8 +32,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    MatPaginatorModule,
+    NgxPaginationModule
   ],
+  
   providers: [],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

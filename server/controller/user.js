@@ -47,7 +47,13 @@ exports.createUser = async (req, res) => {
 
 exports.getUserData= async (req, res) => {
   try {
-      const users = await User.find({})
+
+    const PageSize = +req.query.pageSize;  
+    const CureentPage = +req.query.currentPage;  
+    const users = await User.find({})
+        .skip(PageSize * (CureentPage-1))
+        .limit(PageSize);    
+        
       res.send(users)
 
   } catch (e) 
@@ -66,6 +72,7 @@ exports.updateUser = async (req, res) => {
     try {
 
         console.log(req.body);
+        console.log(req.file);
         const user = await User.findByIdAndUpdate( req.params.id , req.body)
         res.status(200).send(user)
     } catch (e) {

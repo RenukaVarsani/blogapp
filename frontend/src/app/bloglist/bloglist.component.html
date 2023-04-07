@@ -10,8 +10,9 @@
 
   <tbody>
     <tr *ngFor="let i of blogData">
-      <td>{{ i.name }}</td>
+      <td> <a [routerLink]="['/select', i._id]">{{i.name}}</a></td>
       <td>{{ i.description }}</td>
+     
       <td>
         <button type="button" class="btn btn-primary" *ngIf="authService.isAdmin1 || authService.isWriter1" (click)="onEdit(i)"
           data-bs-toggle="modal" id="edit" data-bs-target="#exampleModal"><i class="fa fa-edit"></i>
@@ -38,9 +39,17 @@
         <h5 class="modal-title" id="exampleModalLabel">Edit Details</h5>
           <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
+
       <div class="modal-body">
         <div class="myform">
           <form [formGroup]="details" (ngSubmit)="updateData()">
+
+
+    <div class="mt-3" >
+      <img [src]="blog" width="500" height="500" />
+    </div>
+
             <div class="mb-3 mt-4">
               <label for="exampleInputEmail1" class="form-label">Name</label>
               <input type="text" class="form-control" formControlName="name" id="exampleInputEmail1"
@@ -51,6 +60,12 @@
               <input type="text" class="form-control" formControlName="description"
                 id="exampleInputPassword1" />
             </div>
+
+            <div class="form-outline mt-4 ">
+              <input (change)="onFileSelect($event)" #imageUpload type="file" name="image">
+            </div>
+
+        
             <button type="submit" class="btn btn-secondary mt-3"  data-bs-dismiss="modal">
               Save
             </button>
@@ -60,3 +75,8 @@
     </div>
   </div>
 </div>
+
+
+<mat-paginator [length]= "totalBlog" [pageSize]= "blogsPerPage"  
+[pageSizeOptions]="[2, 4, 6, 8]" (page)= "onChangedPage($event)" >  
+</mat-paginator>

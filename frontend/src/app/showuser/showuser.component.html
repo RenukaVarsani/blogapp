@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let i of UserData">
+    <tr *ngFor="let i of UserData   ">
       <td>{{ i.username }}</td>
       <td>{{ i.role }}</td>
       <td>{{ i.email }}</td>
@@ -57,3 +57,8 @@
   </tbody>
 
 </table>
+
+
+<mat-paginator [length]= "totalUser" [pageSize]= "usersPerPage"  
+[pageSizeOptions]="[2, 4, 6, 8]" (page)= "onChangedPage($event)" >  
+</mat-paginator>

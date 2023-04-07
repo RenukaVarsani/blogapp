@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import {data} from '../showuser/data.model'
 import { NgToastService  } from 'ng-angular-popup';
 import { ToastrService } from 'ngx-toastr';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -22,16 +23,20 @@ export class ShowuserComponent  {
   dataObj: data = new data();
   i: any;
   userId: any;
+  totalUser = 0;
+  usersPerPage = 2;
+  currentpage = 1;
 
 constructor(private userservice:UsersService,
             private fb:FormBuilder,
             private Toast:ToastrService
             ){
-
-    this.userservice.getUserData().subscribe((UserData: any) => {
-    this.UserData = UserData;
+          
+    this.userservice.getUserData(this.usersPerPage, this.currentpage)
+    .subscribe((UserData: any) => {
+      this.UserData = UserData;
+  
   });
-
 
   this.userDetails=this.fb.group({
 
@@ -41,8 +46,16 @@ constructor(private userservice:UsersService,
 
   })}
 
-    ngOnInit(): void {
-  }
+    ngOnInit(): void {}
+
+    onChangedPage(pageData: PageEvent){  
+      this.currentpage = pageData.pageIndex+1;  
+      this.usersPerPage = pageData.pageSize;  
+      this.userservice.getUserData  (this.usersPerPage, this.currentpage).subscribe((res: any)=>{
+        this.UserData=res
+        console.log(res);
+      });  
+    } 
 
   deleteData(i: any) {
     this.userservice.deleteUserData(i._id).subscribe((res) => {
@@ -67,5 +80,4 @@ constructor(private userservice:UsersService,
       timeOut: 1000,
     });
 }}
-
 

@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
   blogData: string | undefined;
   isLogin?: any;
   isAdmin?: any;
+  pagesize!:any;
+  currentsize!:any;
 
 
   constructor(
@@ -28,9 +30,9 @@ export class AppComponent implements OnInit {
     private userService: UsersService,
     private toast:NgToastService){
 
-    this.userService.getBlogData().subscribe((blogData: any) => {
-      this.blogData = blogData;
-    });
+    // this.userService.getBlogData(this.pagesize,this.currentsize).subscribe((blogData: any) => {
+    //   this.blogData = blogData;
+    // });
   }
 
 
