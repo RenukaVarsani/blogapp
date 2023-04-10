@@ -26,6 +26,10 @@
         <a href class="nav-link" routerLink="userlist"> <i class="fa fa-list" aria-hidden="true"></i> User List</a>
       </li>
 
+      <li class="nav-item"  *ngIf="authService.isLogin1 ">
+        <a href class="nav-link" routerLink="home"> <i class="fa fa-list" aria-hidden="true"></i> Blog List</a>
+      </li>
+
 
       <li class="nav-item" *ngIf="authService.isAdmin1 || authService.isLogin1 || authService.isWriter1">
         <a href class="nav-link" (click)="logout()"><i class="fa fa-sign-out"></i> LogOut</a>

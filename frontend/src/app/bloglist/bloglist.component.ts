@@ -44,15 +44,11 @@ export class BloglistComponent implements OnInit {
     private router: Router,
     private Toast: ToastrService
   ) {
-    // this.id = this.route.snapshot.paramMap.get('_id');
-    // this.service.getBlogDataById(this.id).subscribe((data) => {
-    //   this.data = data;
-    // })
+
 
     this.service
       .getBlogData(this.blogsPerPage, this.currentpage)
       .subscribe((blogData: any) => {
-        // console.log(blogData[0].image);
         this.blogData = blogData;
       });
 
@@ -91,7 +87,7 @@ export class BloglistComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
-    
+
   }
 
   // postBlog(){
@@ -118,6 +114,11 @@ export class BloglistComponent implements OnInit {
         timeOut: 1000,
       });
     });
+    this.service
+    .getBlogData(this.blogsPerPage, this.currentpage)
+    .subscribe((blogData: any) => {
+      this.blogData = blogData;
+    });
   }
 
   onEdit(i: any) {
@@ -132,12 +133,18 @@ export class BloglistComponent implements OnInit {
     this.dataObj.name = this.details.value.name;
     this.dataObj.description = this.details.value.description;
     console.log(this.details.value.image);
-    
+
     this.service
       .updateBlogData(this.dataObj, this.blogId, this.details.value.image)
       .subscribe();
     this.Toast.info('', 'Your data is updated', {
       timeOut: 1000,
     });
+
+    this.router.navigate(['/']);
+
+
   }
+
+
 }

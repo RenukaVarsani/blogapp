@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { profile } from 'src/app/addblog/newData.model';
+import { Router } from '@angular/router';
 
 const BLOG = 'http://localhost:8080/blogs/';
 const USER = 'http://localhost:8080/users/';
@@ -13,9 +14,24 @@ const USER = 'http://localhost:8080/users/';
 export class UsersService {
   private profiles: profile[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router:Router) {}
 
   /* user http method */
+
+  requestReset(body:any): Observable<any> {
+    return this.http.post(`${USER}req-reset-password`, body);
+  }
+
+
+  newPassword(body:any): Observable<any> {
+    return this.http.post(`${USER}new-password`, body);
+  }
+
+
+  ValidPasswordToken(body:any): Observable<any> {
+    return this.http.post(`${USER}valid-password-token`, body);
+  }
+
 
   getUserData(pagesize: number, currentpage: number): Observable<any> {
     return this.http
@@ -30,6 +46,11 @@ export class UsersService {
         })
       );
   }
+
+  getUserDataById(id:number){
+    return this.http.get<any>(USER + "selected/" + id)
+      .pipe(map((res:any)=>{return res;}))}
+
 
   getUser(): Observable<any> {
     return this.http.get(USER + 'me', { responseType: 'text' });
@@ -59,6 +80,9 @@ export class UsersService {
     );
   }
 
+
+
+
   /* blog http method */
 
   getBlogData(pagesize: number, currentpage: number): Observable<any> {
@@ -78,19 +102,19 @@ export class UsersService {
   postBlogData(data: any, image: any) {
     let testData: FormData = new FormData();
     console.log(image);
-    
+
 
     testData.append('name', data.name);
     testData.append('description', data.description);
     testData.append('image', image);
 
-  
+
 
     return this.http
       .post<any>(
         BLOG,
         testData
-   
+
       )
       .pipe(
         map((res: any) => {
@@ -105,26 +129,31 @@ export class UsersService {
 
 
 
-  getFiles(): Observable<any> {
-    return this.http.get(BLOG + 'image');
-  }
+  // getFiles(): Observable<any> {
+  //   return this.http.get(BLOG + 'image');
+  // }
 
   updateBlogData(data: any, id: number,image:File) {
     let testData: FormData = new FormData();
     console.log(image);
-    
+
 
     testData.append('name', data.name);
     testData.append('description', data.description);
-    testData.append('image', image);
+   testData.append('image', image);
 
-  
+
     return this.http.patch<any>(BLOG + id, testData).pipe(
       map((res: any) => {
         return res;
+
       })
+
     );
+
   }
+
+
 
   deleteBlogData(id: any) {
     return this.http.delete<any>(BLOG + id).pipe(

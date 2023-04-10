@@ -6,28 +6,36 @@ import { BlogdataComponent } from './blogdata/blogdata.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { RequestResetComponent } from './request-reset/request-reset.component';
+import { ResponseResetComponent } from './response-reset/response-reset.component';
 import { ShowuserComponent } from './showuser/showuser.component';
+import { UserdataComponent } from './userdata/userdata.component';
 
 const routes: Routes = [
 
-  { path: 'login', component: LoginComponent },
 
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-  { path: 'userlist', component: ShowuserComponent },
+  { path: 'login', component: LoginComponent  },
+
+  { path: 'userlist', component: ShowuserComponent , canActivate:[AuthguardGuard]},
 
   { path: 'register', component: RegisterComponent },
 
   { path: "home", component: BloglistComponent },
 
-  { path: "add", component: AddblogComponent    } ,
+  { path: "add", component: AddblogComponent , canActivate:[AuthguardGuard]   } ,
 
-  { path: "select/:id", component: BlogdataComponent    } ,
+  { path: "select/:id", component: BlogdataComponent  } ,
 
-  // { path: "login/resetpassword", component: ResetpasswordComponent},
+  { path: "selected/:id", component: UserdataComponent  } ,
 
-  // {path: 'response-reset-password/:token', component: ResponseresetpasswordComponent},
+  { path: "resetpassword", component: RequestResetComponent},
 
-  {path: '**',component:LoginComponent }
+  {path: 'resetpassword/:token', component: ResponseResetComponent},
+
+  {path: '**',component:LoginComponent },
+
 
 
 

@@ -21,9 +21,13 @@
             formControlName="password"/></div>
 
             <div class="form-group mt-3">
-              <label for="role">Role</label>
-              <input type="text" class="form-control" name="role"
-              formControlName="role"/></div>
+              <label for="password">Role</label>
+              <select class="form-select" aria-label="Default select example">
+                <option  value="User" selected>User</option>
+                <option value="Admin">Admin</option>
+                <option value="Writer">Writer</option>
+              </select>
+            </div>
 
       <div class="form-group text-center mt-3 ">
         <button class="btn btn-secondary " type="submit">Sign Up</button>

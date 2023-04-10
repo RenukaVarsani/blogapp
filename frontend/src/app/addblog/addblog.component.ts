@@ -26,7 +26,8 @@ export class AddblogComponent implements OnInit{
     private router:Router,
      private fb:FormBuilder,
      private Toast:ToastrService,
-     private http:HttpClient
+     private http:HttpClient,
+
      ){}
 
   ngOnInit(){
@@ -49,14 +50,14 @@ onFileSelect(event :any) {
     };
     reader.readAsDataURL(file);
   }
-  
+
 }
 
   postBlog(){
         this.dataObj.name=this.addBlog.value.name;
       this.dataObj.description=this.addBlog.value.description;
       console.log(this.addBlog.value.image.name);
-      
+
       this.userservice.postBlogData(this.dataObj, this.addBlog.value.image )
       .subscribe({
         next:((res)=>{
@@ -65,6 +66,7 @@ onFileSelect(event :any) {
             timeOut: 1000,
           });
           this.addBlog.reset();
+          this.router.navigate(['/home']);
         })
       })
 

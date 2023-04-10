@@ -109,7 +109,7 @@ export class AuthService  {
           this.Toast.info('','You are Registered!' ,{
             timeOut: 1000,
           });
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         },
         (error) => {
           console.log(error);

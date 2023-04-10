@@ -14,6 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BlogdataComponent } from './blogdata/blogdata.component';
+import { RequestResetComponent } from './request-reset/request-reset.component';
+import { ResponseResetComponent } from './response-reset/response-reset.component';
+import { UserdataComponent } from './userdata/userdata.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +26,9 @@ import { BlogdataComponent } from './blogdata/blogdata.component';
     AddblogComponent,
     BloglistComponent,
     BlogdataComponent,
+    RequestResetComponent,
+    ResponseResetComponent,
+    UserdataComponent,
   ],
   imports: [
     BrowserModule,

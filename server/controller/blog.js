@@ -54,9 +54,10 @@ exports.showBlog = async (req, res) => {
 exports.updateBlog = async (req, res) => {
 
     try {
-        console.log(req.file.filename);
-        const imagePath = `http://localhost:8080/images/${req.file.filename}`
-        const blog = await Blog.findByIdAndUpdate(req.params.id, {...req.body , image : imagePath})
+        // console.log(req.file.filename);
+        const imagePath = `http://localhost:8080/images/${req.file?.filename}`
+        const updatedBlog = {...req.body }
+        const blog = await Blog.findByIdAndUpdate(req.params.id, )
         await blog.save()
         res.status(200).send("blog")
     } catch (e) {
