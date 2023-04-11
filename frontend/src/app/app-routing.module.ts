@@ -30,7 +30,7 @@ const routes: Routes = [
 
   { path: "selected/:id", component: UserdataComponent  } ,
 
-  { path: "resetpassword", component: RequestResetComponent},
+  { path: "login/resetpassword", component: RequestResetComponent},
 
   {path: 'resetpassword/:token', component: ResponseResetComponent},
 

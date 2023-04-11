@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/services/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-response-reset',
@@ -19,6 +20,7 @@ export class ResponseResetComponent {
   constructor(
     private userService: UsersService,
     private router: Router,
+    private Toast:ToastrService,
     private route: ActivatedRoute,
     private fb: FormBuilder ) {
 
@@ -26,21 +28,22 @@ export class ResponseResetComponent {
     this.route.params.subscribe(params => {
       this.resetToken = params['token'];
       console.log(this.resetToken);
-      this.VerifyToken();
+      this.VerifyToken(this.resetToken);
     });
   }
 
 
   ngOnInit() {
-
     this.Init();
+
   }
 
-  VerifyToken() {
-    this.userService
-    .ValidPasswordToken({resetToken: this.resetToken})
-    .subscribe((res) => {
-   if(!res==null){
+  VerifyToken(token : any) {
+    this.userService.ValidPasswordToken(token).subscribe((res) => {
+      console.log([res].length);
+
+
+   if([res].length >= 1){
     this.CurrentState = 'Verified';
    }
    else{
@@ -51,22 +54,12 @@ export class ResponseResetComponent {
     )
   }
 
-  //   this.userService.ValidPasswordToken({ resetToken: this.resetToken }).subscribe(
-  //    (res) => {
-  //       this.CurrentState = 'Verified';
-  //     },
-  //     err => {
-  //       this.CurrentState = 'NotVerified';
-  //     }
-  //   );
-  // }
-
   Init() {
     this.ResponseResetForm = this.fb.group(
       {
         resettoken: [this.resetToken],
         newPassword: ['', [Validators.required, Validators.minLength(7)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(4)]]
+        confirmPassword: ['', [Validators.required, Validators.minLength(7)]]
 
       }
     );
@@ -90,17 +83,15 @@ export class ResponseResetComponent {
 
 
   ResetPassword(form:any) {
-    console.log(form.get('confirmPassword'));
     if (form.valid) {
       this.IsResetFormValid = true;
-      this.userService.newPassword(this.ResponseResetForm.value).subscribe(
-        data => {
-          this.ResponseResetForm.reset();
+      this.userService.newPassword(this.ResponseResetForm.value,this.resetToken).subscribe(
+        res => {
+          console.log(res);
+          this.Toast.info('','Password Updated' ,{
+            timeOut: 1000,
+          });
 
-          setTimeout(() => {
-
-            this.router.navigate(['register']);
-          }, 3000);
         },
 
       );

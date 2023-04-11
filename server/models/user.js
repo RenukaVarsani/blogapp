@@ -28,6 +28,8 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    resetToken: String,
+    resetTokenExpiration: Date,
     password: {
         type: String,   
         minlength: 7,

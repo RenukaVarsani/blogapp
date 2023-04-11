@@ -1,14 +1,12 @@
 <div class="container-fluid form">
 
 
-    <div class="row" >
+    <div class="row" *ngIf="CurrentState=='Verified'" >
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Set New Password</h5>
                     <div>
-
-
                         <form action="" [formGroup]="ResponseResetForm" (ngSubmit)="ResetPassword(ResponseResetForm)">
                             <div class="form-group">
                                 <input  class="form-control form-control-lg" placeholder="Password"

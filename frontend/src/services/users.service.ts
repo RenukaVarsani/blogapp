@@ -23,13 +23,13 @@ export class UsersService {
   }
 
 
-  newPassword(body:any): Observable<any> {
-    return this.http.post(`${USER}new-password`, body);
+  newPassword(body:any,token:any): Observable<any> {
+    return this.http.post(`${USER}reset-password/${token}` , body);
   }
 
 
-  ValidPasswordToken(body:any): Observable<any> {
-    return this.http.post(`${USER}valid-password-token`, body);
+  ValidPasswordToken(token:any): Observable<any> {
+    return this.http.get(`${USER}reset-password/${token}`);
   }
 
 

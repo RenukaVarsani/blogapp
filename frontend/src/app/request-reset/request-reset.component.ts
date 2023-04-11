@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/services/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-request-reset',
@@ -16,6 +17,7 @@ export class RequestResetComponent {
   constructor(
     private userService: UsersService,
     private router: Router,
+    private Toast:ToastrService
    ) {
 
   }
@@ -39,6 +41,9 @@ export class RequestResetComponent {
       this.userService.requestReset(this.RequestResetForm.value).subscribe(
         data => {
           this.RequestResetForm.reset();
+          this.Toast.info('','Sent reset link to this Mail!' ,{
+            timeOut: 1000,
+          });
           //  this.router.navigate(['register']);
           })
 
