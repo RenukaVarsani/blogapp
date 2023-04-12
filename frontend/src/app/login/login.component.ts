@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from './../../services/auth.service';
 import { StorageService } from './../../services/storage.service';
 import { data } from './data.model';
-import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -22,7 +22,6 @@ export class LoginComponent {
     private authService: AuthService,
     private storageService: StorageService,
     private fb: FormBuilder,
-    private Toast:ToastrService
   ) {
     this.login = this.fb.group({
       password: [''],

@@ -56,7 +56,6 @@ onFileSelect(event :any) {
   postBlog(){
         this.dataObj.name=this.addBlog.value.name;
       this.dataObj.description=this.addBlog.value.description;
-      console.log(this.addBlog.value.image.name);
 
       this.userservice.postBlogData(this.dataObj, this.addBlog.value.image )
       .subscribe({

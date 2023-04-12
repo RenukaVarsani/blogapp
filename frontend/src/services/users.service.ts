@@ -40,45 +40,36 @@ export class UsersService {
         { headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' }) }
       )
       .pipe(
-        map((res: any) => {
-          console.log(res);
-          return res;
-        })
-      );
-  }
+        (res: any) => { return res;},
+        (err:any) =>{return err;}) }
+
 
   getUserDataById(id:number){
     return this.http.get<any>(USER + "selected/" + id)
-      .pipe(map((res:any)=>{return res;}))}
+      .pipe((res:any)=>{return res;},
+      (err:any) =>{ return err;} )}
 
 
   getUser(): Observable<any> {
-    return this.http.get(USER + 'me', { responseType: 'text' });
-  }
+    return this.http.get(USER + 'me', { responseType: 'text' }); }
+
 
   updateUserData(data: any, id: number) {
     return this.http.patch<any>(USER + id, data).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
-  }
+      (res: any) => {return res;},
+      (err:any) =>{ return err;})}
+
 
   deleteUserData(id: number) {
     return this.http.delete<any>(USER + id).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
-  }
+      (res: any) => { return res; },
+        (err:any) =>{ return err;})}
+
 
   postUserData(data: any) {
     return this.http.post<any>(USER + '/signup', data).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
-  }
+      (res: any) => {  return res;},
+      (err:any) =>{ return err;})}
 
 
 
@@ -86,80 +77,54 @@ export class UsersService {
   /* blog http method */
 
   getBlogData(pagesize: number, currentpage: number): Observable<any> {
-    // const queryParams = ;
     return this.http
       .get<any>(BLOG + `?pageSize=${pagesize}&currentPage=${currentpage}`, {
         headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' }),
       })
       .pipe(
-        map((res: any) => {
-          console.log(res);
-          return res;
-        })
-      );
+        (res: any) => { console.log(res); return res;},
+        (err:any) =>{ return err;});
   }
 
   postBlogData(data: any, image: any) {
     let testData: FormData = new FormData();
     console.log(image);
-
-
     testData.append('name', data.name);
     testData.append('description', data.description);
     testData.append('image', image);
 
-
-
     return this.http
-      .post<any>(
-        BLOG,
-        testData
-
-      )
+      .post<any>(  BLOG, testData )
       .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
+        (res: any) => {return res;},
+        (err:any) =>{return err; })}
+
 
   getBlogDataById(id:number){
     return this.http.get<any>(BLOG + "select/" + id)
-      .pipe(map((res:any)=>{return res;}))}
+      .pipe((res:any)=>{return res;},
+      (err:any) =>{ return err;},)}
 
-
-
-  // getFiles(): Observable<any> {
-  //   return this.http.get(BLOG + 'image');
-  // }
 
   updateBlogData(data: any, id: number,image:File) {
     let testData: FormData = new FormData();
     console.log(image);
-
-
     testData.append('name', data.name);
     testData.append('description', data.description);
    testData.append('image', image);
 
 
     return this.http.patch<any>(BLOG + id, testData).pipe(
-      map((res: any) => {
-        return res;
-
-      })
-
-    );
-
-  }
+      (res: any) => { return res; },
+       (err:any) =>{ return err;})}
 
 
 
   deleteBlogData(id: any) {
     return this.http.delete<any>(BLOG + id).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
+                (res: any) => {return res;},
+                (err:any) =>{ return err;})
+
+
   }
 }

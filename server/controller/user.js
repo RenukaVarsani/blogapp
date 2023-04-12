@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const nodemailer = require("nodemailer")
 const randomstring = require("randomstring")
-const passwordResetToken = require('../models/reset');
 
 var transporter = nodemailer.createTransport({
   service: 'Gmail',

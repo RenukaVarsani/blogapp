@@ -35,6 +35,7 @@ export class BloglistComponent implements OnInit {
   data: any;
   imageData!: string;
   blog: any = [];
+  errMessage: any;
 
   constructor(
     private service: UsersService,
@@ -50,7 +51,8 @@ export class BloglistComponent implements OnInit {
       .getBlogData(this.blogsPerPage, this.currentpage)
       .subscribe((blogData: any) => {
         this.blogData = blogData;
-      });
+      }
+      );
 
     this.details = this.fb.group({
       name: [''],
@@ -87,26 +89,7 @@ export class BloglistComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
-
   }
-
-  // postBlog(){
-  //   this.dataObj.name=this.addBlog.value.name;
-  // this.dataObj.description=this.addBlog.value.description;
-  // console.log(this.addBlog.value.image.name);
-
-  // this.userservice.postBlogData(this.dataObj, this.addBlog.value.image )
-  // .subscribe({
-  //   next:((res)=>{
-  //     console.log(res)
-  //     this.Toast.info('','Your data is updated' ,{
-  //       timeOut: 1000,
-  //     });
-  //     this.addBlog.reset();
-  //   })
-  // })
-
-  //   }
 
   deleteData(id: any) {
     this.service.deleteBlogData(id).subscribe((res) => {
