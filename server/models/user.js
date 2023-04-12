@@ -28,8 +28,11 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    resetToken: String,
-    resetTokenExpiration: Date,
+
+    refreshToken:{
+            type:String
+    },
+
     password: {
         type: String,   
         minlength: 7,
@@ -48,15 +51,22 @@ const userSchema = new mongoose.Schema({
 )
 
 
-userSchema.methods.genrateAuthToken = async function(){
+userSchema.methods.genrateAccessAuthToken = async function(){
     const user = this 
     console.log(user);
-    const token = jwt.sign({_id: user._id.toString()},'crud')
-    console.log(token);
+    const token = jwt.sign({_id: user._id.toString()} , process.env.ACCESS_TOKEN  , {expiresIn:'5s'})
+    //console.log(token); 
     await user.save()
-    return token
+    return token;
 }
 
+userSchema.methods.genrateRefreshAuthToken = async function(){
+    
+    const user = this 
+    const RefreshToken = jwt.sign({_id: user._id.toString()} , process.env.REFRESH_TOKEN)
+    await user.save()
+    return RefreshToken;
+}
 
 userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({ email })

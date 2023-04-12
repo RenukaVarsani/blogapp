@@ -21,10 +21,11 @@ router.delete('/:id', UserController.deleteUser);
 
 router.post('/req-reset-password', UserController.postReset);
 
-
 router.get('/reset-password/:token', UserController.verifyToken);
 
 router.post('/reset-password/:token', UserController.postNewPassword);
+
+router.post('/token' , UserController.getRefreshToken);
 
 
 

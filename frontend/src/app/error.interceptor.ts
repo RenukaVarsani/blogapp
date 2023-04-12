@@ -35,7 +35,6 @@ export class ErrorInterceptor implements HttpInterceptor {
           timeOut: 1000,
         });
          window.alert(errorMsg);
-       //  errorMsg+="Something bad happened ,try again"
          return throwError(() => new Error(errorMsg));
       })
 )

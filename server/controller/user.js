@@ -14,12 +14,39 @@ var transporter = nodemailer.createTransport({
 });
 
 
+exports.getRefreshToken = async (req , res) => {
 
-exports.login = async (req, res) => {
+const refreshToken = req.body.token;
+
+try{
+
+if(refreshToken == null){res.status(403).send()}
+let refreshToken = await User.findOne({ refreshToken: refreshToken  });
+jwt.verify(refreshToken , process.env.REFRESH_TOKEN) , async (err , user) =>{
+
+  if(err) { res.status(403).send()  }
+
+  else
+  {
+    const token = await user.genrateAccessAuthToken()
+     res.send(token)
+  }
+}
+} 
+catch (error) {
+  res.status(500)
+}
+
+}
+
+exports.login = async (req , res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password)
-    const token = await user.genrateAuthToken()
-    res.send({ user, token })
+    const token = await user.genrateAccessAuthToken()
+    console.log(token);
+    const refreshToken = await user.genrateRefreshAuthToken()
+    console.log(refreshToken);
+    res.send({ user, token , refreshToken })
   } catch (e) {
     console.log(e);
     res.status(500).send()
@@ -121,7 +148,7 @@ exports.postReset = async (req, res) => {
         user.resetTokenExpiration = Date.now() + 3600000;
         return user.save();
       }).then(result => {
-       // res.redirect('/login');
+   
         transporter.sendMail({
           to: req.body.email,
           from: 'renuka.varsani@aspiresoftserv.in',
@@ -135,7 +162,6 @@ exports.postReset = async (req, res) => {
         }).catch((error) => {
           console.log(error.message);
         });
-        //res.redirect('/login')
 
 
       })
@@ -163,10 +189,10 @@ exports.getUserById = async (req, res) => {
 
 exports.verifyToken = async(req, res) => {
   const token = req.params.token;
-  // console.log(token);
+
   try {
    const user = await User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
-    // console.log(user);
+  
      res.status(200).send(user)
   } catch (error) {
     res.status(404).send(err)

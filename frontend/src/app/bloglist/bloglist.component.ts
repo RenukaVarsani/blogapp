@@ -123,6 +123,11 @@ export class BloglistComponent implements OnInit {
     this.Toast.info('', 'Your data is updated', {
       timeOut: 1000,
     });
+    this.service
+    .getBlogData(this.blogsPerPage, this.currentpage)
+    .subscribe((blogData: any) => {
+      this.blogData = blogData;
+    });
 
     this.router.navigate(['/']);
 

@@ -19,6 +19,7 @@ export class AuthService  {
 
   user: any
   token: any;
+  refreshToken:any
   roles: any;
   isUser: boolean = false;
   isAdmin1: boolean = false;
@@ -65,21 +66,36 @@ export class AuthService  {
     return this.token;
   }
 
+  getRefresh() {
+    return this.refreshToken;
+  }
+
+  getRefreshToken(){
+
+    let input = {  "token" : this.getRefresh()}
+    return this.http.post(AUTH_API + '/token' , input)
+  }
+
   //FOR USER LOGIN
   login(email: string, password: string) {
     return this.http
-      .post<{ token: string; user: string }>(AUTH_API + '/login', {
+      .post<{
+        refreshToken: any; token: string; user: string
+}>(AUTH_API + '/login', {
         email,
         password,
       })
       .subscribe(
         (response) => {
           const token = response.token;
+          const refreshToken = response.refreshToken
+          this.refreshToken = refreshToken;
           this.token = token;
           if (token) {
 
             this.user = response.user;
-            this.saveAuthData(token, this.user);
+
+            this.saveAuthData(token, this.user , refreshToken);
             this.isAdmin()
             this.Toast.info('','You are login!' ,{
               timeOut: 1000,
@@ -121,6 +137,7 @@ export class AuthService  {
 
   logout() {
     this.token = null;
+    this.refreshToken = null;
     this.isLogin1 = false;
     this.user = null;
     this.clearAuthData();
@@ -131,14 +148,14 @@ export class AuthService  {
     this.router.navigate(['/']);
   }
 
-  private saveAuthData(token: string, user: string) {
+  private saveAuthData(token: string, user: string , refreshToken:any) {
     localStorage.setItem('token', token);
+    localStorage.setItem('refreshToken', refreshToken);
     localStorage.setItem('user', JSON.stringify(user));
   }
 
   private clearAuthData() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+      localStorage.clear()
   }
 
 }
