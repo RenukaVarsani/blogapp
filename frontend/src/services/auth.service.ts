@@ -66,21 +66,22 @@ export class AuthService  {
     return this.token;
   }
 
-  getRefresh() {
-    return this.refreshToken;
-  }
+  getAccessToken(){
+    //console.log("in api")
+      const refreshToken = localStorage.getItem('refreshToken')
+      const data = {
+        refreshToken
+      }
+    // let input = {  "token" : this.getRefresh()}
+    return this.http.post(AUTH_API + '/token' , data)
 
-  getRefreshToken(){
-
-    let input = {  "token" : this.getRefresh()}
-    return this.http.post(AUTH_API + '/token' , input)
   }
 
   //FOR USER LOGIN
   login(email: string, password: string) {
     return this.http
       .post<{
-        refreshToken: any; token: string; user: string
+        refreshToken: any; token: string; user: string;
 }>(AUTH_API + '/login', {
         email,
         password,
@@ -146,6 +147,11 @@ export class AuthService  {
       timeOut: 1000,
     });
     this.router.navigate(['/']);
+  }
+
+  public saveToken(token: string) {
+    localStorage.setItem('token' , token)
+
   }
 
   private saveAuthData(token: string, user: string , refreshToken:any) {

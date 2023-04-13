@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
          let errorMsg = '';
 
-         if (error.error instanceof ErrorEvent) {
+         if (error && error.error instanceof ErrorEvent) {
             console.log('This is client side error');
             errorMsg = `Error: ${error.error.message}`;
          }
@@ -34,7 +34,7 @@ export class ErrorInterceptor implements HttpInterceptor {
          this.Toast.info('', errorMsg,{
           timeOut: 1000,
         });
-         window.alert(errorMsg);
+
          return throwError(() => new Error(errorMsg));
       })
 )

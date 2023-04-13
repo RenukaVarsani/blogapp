@@ -53,8 +53,8 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.genrateAccessAuthToken = async function(){
     const user = this 
-    console.log(user);
-    const token = jwt.sign({_id: user._id.toString()} , process.env.ACCESS_TOKEN  , {expiresIn:'5s'})
+  //  console.log(user);
+    const token = jwt.sign({_id: user._id.toString()} , process.env.ACCESS_TOKEN  , {expiresIn:"10s"})
     //console.log(token); 
     await user.save()
     return token;
@@ -64,6 +64,7 @@ userSchema.methods.genrateRefreshAuthToken = async function(){
     
     const user = this 
     const RefreshToken = jwt.sign({_id: user._id.toString()} , process.env.REFRESH_TOKEN)
+    user.refreshToken = this.refreshToken
     await user.save()
     return RefreshToken;
 }

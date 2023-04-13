@@ -4,38 +4,47 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from 'src/services/auth.service';
 
-//on working
+
 @Injectable()
 export class RefreshInterceptor implements HttpInterceptor {
-
+  token!: Object;
   constructor(private service:AuthService) {}
 
-  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    return next.handle(request).pipe(
+      catchError((error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+            console.log('error Event');
+          } else {
+            switch (error.status) {
+              case 419:
 
-    return next.handle(req).pipe(
-
-      catchError((error: HttpErrorResponse) => {
-
-         let errorMsg = '';
-
-         if (error.error instanceof ErrorEvent &&  error.status === 401) {
-
-          return this.handle401Error(req, next);
+                this.service.getAccessToken().subscribe({
+                  next:(res:any)=>{
+                         localStorage.setItem("token" , res.token)
+                  },
+                  error:(error)=>{
+                    console.log("error in interceptor"+error)
+                  }
+                })
+            }
+          }
+        } else {
+          console.log('error occured');
         }
-         }}))
-
-  }
-
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (error.status == '403') {
-      return this.service.getRefreshToken()
-
-    }
-
+        return throwError(() => {
+          new Error(error.statusText);
+        });
+      })
+    );
   }
 }

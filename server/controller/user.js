@@ -14,39 +14,41 @@ var transporter = nodemailer.createTransport({
 });
 
 
-exports.getRefreshToken = async (req , res) => {
+exports.getRefreshToken = async (req, res) => {
 
-const refreshToken = req.body.token;
 
-try{
+  try {
 
-if(refreshToken == null){res.status(403).send()}
-let refreshToken = await User.findOne({ refreshToken: refreshToken  });
-jwt.verify(refreshToken , process.env.REFRESH_TOKEN) , async (err , user) =>{
+    let refreshToken = req.body;
+    const decoded = jwt.verify(refreshToken.refreshToken, process.env.REFRESH_TOKEN)
+    const user = await User.findOne({
+      _id: decoded._id
+    });
 
-  if(err) { res.status(403).send()  }
-
-  else
-  {
     const token = await user.genrateAccessAuthToken()
-     res.send(token)
+    res.json({
+      success: true,
+      message: 'token created',
+      token
+    })
+  }
+  catch (error) {
+    res.json({
+      success: false,
+      message: 'error in creating token',
+      status: 500
+    })
   }
 }
-} 
-catch (error) {
-  res.status(500)
-}
 
-}
-
-exports.login = async (req , res) => {
+exports.login = async (req, res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password)
     const token = await user.genrateAccessAuthToken()
     console.log(token);
     const refreshToken = await user.genrateRefreshAuthToken()
     console.log(refreshToken);
-    res.send({ user, token , refreshToken })
+    res.send({ user, token, refreshToken })
   } catch (e) {
     console.log(e);
     res.status(500).send()
@@ -148,7 +150,7 @@ exports.postReset = async (req, res) => {
         user.resetTokenExpiration = Date.now() + 3600000;
         return user.save();
       }).then(result => {
-   
+
         transporter.sendMail({
           to: req.body.email,
           from: 'renuka.varsani@aspiresoftserv.in',
@@ -176,24 +178,24 @@ exports.getUserById = async (req, res) => {
   const _id = req.params.id
 
   try {
-      const user = await User.findOne({ _id })
-      if (!user) {
-          return res.status(404).send()
-      }
-      res.send(user)
+    const user = await User.findOne({ _id })
+    if (!user) {
+      return res.status(404).send()
+    }
+    res.send(user)
   } catch (e) {
-      res.status(500).send()
+    res.status(500).send()
   }
 }
 
 
-exports.verifyToken = async(req, res) => {
+exports.verifyToken = async (req, res) => {
   const token = req.params.token;
 
   try {
-   const user = await User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
-  
-     res.status(200).send(user)
+    const user = await User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+
+    res.status(200).send(user)
   } catch (error) {
     res.status(404).send(err)
   }
@@ -201,21 +203,21 @@ exports.verifyToken = async(req, res) => {
 };
 
 
-exports.postNewPassword = async(req, res) => {
+exports.postNewPassword = async (req, res) => {
   try {
     console.log(req.body);
-  const newPassword = req.body.newPassword;
-  const passwordToken = req.body.resettoken;
-  const hashPasssword = await bcrypt.hash(newPassword, 8) 
-  const UpdatedUser = await User.updateOne({
-    resetToken: passwordToken,
-    resetTokenExpiration: { $gt: Date.now() }
-  },
-  {
-    $set: {
-      password: hashPasssword,
+    const newPassword = req.body.newPassword;
+    const passwordToken = req.body.resettoken;
+    const hashPasssword = await bcrypt.hash(newPassword, 8)
+    const UpdatedUser = await User.updateOne({
+      resetToken: passwordToken,
+      resetTokenExpiration: { $gt: Date.now() }
     },
-  }
+      {
+        $set: {
+          password: hashPasssword,
+        },
+      }
     );
     console.log(UpdatedUser);
   } catch (error) {
