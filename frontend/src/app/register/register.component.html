@@ -1,27 +1,28 @@
-<div class="col-md-6">
+<div class="col-md-8"  id="main">
 
-
-    <form [formGroup]="signUp" (ngSubmit)="submit()"
+    <form [formGroup]="signUp" (ngSubmit)="submit()"  class= " card p-2 bg-light"
       name="form"  novalidate>
+      <fieldset >
+        <legend class="text-center mb-4 mt-2">Register Form</legend>
 <!--  -->
-      <div class="form-group mt-3">
-        <label for="username">Username</label>
+      <div class="form-outline mb-3">
+        <label for="username">Username:</label>
         <input type="text" class="form-control" name="username"
         formControlName="username"/>
         </div>
 
-        <div class="form-group mt-3">
-          <label for="email">Email</label>
+        <div class="form-outline mb-3">
+          <label for="email">Email:</label>
           <input type="email" class="form-control" name="email"
           formControlName="email"/></div>
 
-          <div class="form-group mt-3">
-            <label for="password">Password</label>
+          <div class="form-outline mb-3">
+            <label for="password">Password:</label>
             <input type="password" class="form-control" name="password"
             formControlName="password"/></div>
 
-            <div class="form-group mt-3">
-              <label for="password">Role</label>
+            <div class="form-outline mb-3">
+              <label for="password">Role:</label>
               <select class="form-select" aria-label="Default select example">
                 <option  value="User" selected>User</option>
                 <option value="Admin">Admin</option>
@@ -30,8 +31,8 @@
             </div>
 
       <div class="form-group text-center mt-3 ">
-        <button class="btn btn-secondary " type="submit">Sign Up</button>
+        <button class="btn btn-block"  type="submit">Sign Up</button>
       </div>
-
+</fieldset>
 </form>
 </div>

@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         default: "user",
-       // enum: ["admin","user","writer"]
       },
     email: {
         type: String,
@@ -57,7 +56,7 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.genrateAccessAuthToken = async function(){
     const user = this 
     const token = jwt.sign({_id: user._id.toString()} , process.env.ACCESS_TOKEN  , {expiresIn:"10s"})
-    await user.save()
+   // await user.save()
     return token;
 }
 
@@ -65,8 +64,8 @@ userSchema.methods.genrateRefreshAuthToken = async function(){
     
     const user = this 
     const RefreshToken = jwt.sign({_id: user._id.toString()} , process.env.REFRESH_TOKEN)
-    user.refreshToken = this.refreshToken
-    await user.save()
+   // user.refreshToken = this.refreshToken
+   // await user.save()
     return RefreshToken;
 }
 

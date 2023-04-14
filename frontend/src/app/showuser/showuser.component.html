@@ -1,7 +1,11 @@
-<table class="mt-5 text-center table" id="demo">
+<div class="row justify-content-center">
+  <div class="col-md-8">
+
+
+<table class="mt-5  table" id="demo">
   <thead>
     <tr>
-      <th>User</th>
+      <th >User</th>
       <th>Role</th>
       <th>EmailId</th>
       <th colspan="2">Actions</th>
@@ -10,11 +14,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let i of UserData">
-      <td><a [routerLink]="['/selected', i._id]">{{i.username}}</a></td>
-      <td>{{ i.role }}</td>
-      <td>{{ i.email }}</td>
+      <td style="color:#434B54"><a   style="color:#434B54"  [routerLink]="['/selected', i._id]">{{i.username}}</a></td>
+      <td style="color:#434B54"> {{ i.role }}</td>
+      <td  style="color:#434B54">{{ i.email }}</td>
       <td>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" id="edit" data-bs-target="#exampleModal"
+        <button type="button" class="btn"  style="color:  #007C1A;" data-bs-toggle="modal" data-bs-target="#exampleModal"
           (click)="onEdit(i)">
           <i class="fa fa-edit"></i>
           Edit
@@ -48,7 +52,7 @@
 
       </td>
       <td>
-        <button (click)="deleteData(i)" id="delete" class="btn">
+        <button (click)="deleteData(i)" id="delete" class="btn " style="color: red;">
           <i class="fa fa-trash-o"></i>
           Delete
         </button>
@@ -62,3 +66,5 @@
 <mat-paginator [length]= "totalUser" [pageSize]= "usersPerPage"
 [pageSizeOptions]="[2, 4, 6, 8]" (page)= "onChangedPage($event)" >
 </mat-paginator>
+</div>
+</div>

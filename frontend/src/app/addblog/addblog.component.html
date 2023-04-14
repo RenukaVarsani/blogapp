@@ -1,33 +1,37 @@
-<div class="col-md-6">
-  <form [formGroup]="addBlog" (ngSubmit)="postBlog()" enctype="multipart/form-data">
+<div class="col-md-8" id="main">
 
-    <div class="form-outline mt-4">
+  <form [formGroup]="addBlog" (ngSubmit)="postBlog()"  class= " card p-3 bg-light" enctype="multipart/form-data">
+    <fieldset >
+      <legend class="text-center mb-4">Add Blog Data</legend>
+    <div class="form-outline mb-4">
+      <label class="form-label"name="name" for="form1Example1">Name:</label>
       <input type="text" id="form1Example1" formControlName="name" class="form-control" />
-      <label class="form-label"name="name" for="form1Example1">Name</label>
+
     </div>
 
 
-    <div class="form-outline mt-4">
+    <div class="form-outline mb-4">
+      <label class="form-label" for="form1Example2">Description:</label>
       <input type="text" id="form1Example2"   formControlName="description" class="form-control" />
-      <label class="form-label" for="form1Example2">Description</label>
+
     </div>
 
 <!-- img -->
 
 
 
-    <div class="form-outline mt-4 ">
+    <div class="form-outline mb-4 ">
       <input (change)="onFileSelect($event)" #imageUpload type="file" name="image">
     </div>
 
     <div *ngIf="imageData" class="mt-3" >
       <img [src]="imageData" width="100" height="100" />
     </div>
-    
-   
-    <div class="form-group text-center  mt-3">
-    <button type="submit" class="btn btn-secondary ">Submit</button>
-   </div>
 
+
+    <div class="form-group text-center mt-3">
+    <button type="submit" class="btn btn-block ">Submit</button>
+   </div>
+</fieldset>
   </form>
 </div>

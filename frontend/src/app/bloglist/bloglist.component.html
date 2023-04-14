@@ -1,26 +1,29 @@
-<table class="mt-5 table" id="demo">
+<div class="row justify-content-center">
+  <div class="col-md-8">
+
+<table class="mt-5 table mt-5 "  id="demo">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Description</th>
-      <th colspan="2">Actions</th>
+      <th >Description</th>
+      <th colspan="2" >Actions</th>
 
     </tr>
   </thead>
 
   <tbody>
     <tr *ngFor="let i of blogData">
-      <td> <a [routerLink]="['/select', i._id]">{{i.name}}</a></td>
-      <td>{{ i.description }}</td>
+      <td  style="color:#434B54"> <a    style="color:#434B54" [routerLink]="['/select', i._id]">{{i.name}}</a></td>
+      <td   style="color:#434B54"> {{ i.description }}</td>
 
       <td>
-        <button type="button" class="btn btn-primary" *ngIf="authService.isAdmin1 || authService.isWriter1" (click)="onEdit(i)"
+        <button type="button" class="btn" style="color:  #007C1A;" *ngIf="authService.isAdmin1 || authService.isWriter1" (click)="onEdit(i)"
           data-bs-toggle="modal" id="edit" data-bs-target="#exampleModal"><i class="fa fa-edit"></i>
           Edit
         </button>
       </td>
       <td>
-        <button (click)="deleteData(i._id)" id="delete" class="btn" *ngIf="authService.isAdmin1 || authService.isWriter1">
+        <button (click)="deleteData(i._id)" id="delete" class="btn" style="color: red;" *ngIf="authService.isAdmin1 || authService.isWriter1">
           <i class="fa fa-trash-o"></i>
           Delete
         </button>
@@ -80,3 +83,6 @@
 <mat-paginator [length]= "totalBlog" [pageSize]= "blogsPerPage"
 [pageSizeOptions]="[2, 4, 6, 8]" (page)= "onChangedPage($event)" >
 </mat-paginator>
+
+</div>
+</div>

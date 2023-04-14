@@ -1,38 +1,38 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ms-5" >
-
-      CRUD</a>
+  <nav class="navbar navbar-expand  ">
+    <a class="navbar-brand ms-5 text-white" > CRUD</a>
     <ul href class="navbar-nav me-auto" routerLinkActive="active">
     </ul>
 
-    <ul class="navbar-nav ml auto justify-content-end " *ngIf="!isLogin">
-      <li class="nav-item">
-        <a href class="nav-link" *ngIf="!authService.isLogin1" routerLink="register">
-          Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a  href class="nav-link" *ngIf="!authService.isLogin1" routerLink="login">Login</a>
-      </li>
-    </ul>
 
-    <ul class="navbar-nav ml-auto">
+
+    <ul class="navbar-nav ml-auto ">
+
+      <ul class="navbar-nav ml auto justify-content-end " *ngIf="!isLogin">
+        <li class="nav-item">
+          <a href class="nav-link text-white" *ngIf="!authService.isLogin1" routerLink="register"><i class="fa fa-user-plus" aria-hidden="true"></i>
+            Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a  href class="nav-link text-white"  *ngIf="!authService.isLogin1" routerLink="login"><i class="fa fa-sign-in" ></i>  Login</a>
+        </li>
+      </ul>
 
       <li class="nav-item"  *ngIf="authService.isAdmin1 || authService.isWriter1">
-        <a href class="nav-link" routerLink="add"> <i class="fa fa-plus" aria-hidden="true"></i> Add Blog</a>
+        <a href class="nav-link text-white" routerLink="add"> <i class="fa fa-plus" aria-hidden="true"></i> Add Blog</a>
       </li>
 
       <li class="nav-item"  *ngIf="authService.isAdmin1">
-        <a href class="nav-link" routerLink="userlist"> <i class="fa fa-list" aria-hidden="true"></i> User List</a>
+        <a href class="nav-link text-white" routerLink="userlist"> <i class="fa fa-list" aria-hidden="true"></i> User List</a>
       </li>
 
       <li class="nav-item"  *ngIf="authService.isLogin1 ">
-        <a href class="nav-link" routerLink="home"> <i class="fa fa-list" aria-hidden="true"></i> Blog List</a>
+        <a href class="nav-link text-white" routerLink="home"> <i class="fa fa-list" aria-hidden="true"></i> Blog List</a>
       </li>
 
 
       <li class="nav-item" *ngIf="authService.isAdmin1 || authService.isLogin1 || authService.isWriter1">
-        <a href class="nav-link" (click)="logout()"><i class="fa fa-sign-out"></i> LogOut</a>
+        <a href class="nav-link text-white" (click)="logout()"><i class="fa fa-sign-out"></i> LogOut</a>
       </li>
     </ul>
   </nav>

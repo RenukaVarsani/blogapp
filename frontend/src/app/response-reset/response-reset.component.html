@@ -19,7 +19,7 @@
                                     placeholder="Confirm Password" type="password" id="cpassword"
                                     formControlName="confirmPassword" />
                                 <span *ngIf="!ResponseResetForm.get('confirmPassword')?.valid && !IsResetFormValid"
-                                    class="help-block">. </span>
+                                    class="help-block text-danger">. </span>
                                 <span
                                     *ngIf="ResponseResetForm.get('confirmPassword')?.valid && (ResponseResetForm.get('confirmPassword')?.value != ResponseResetForm.get('newPassword')?.value) && !IsResetFormValid"
                                     class="help-block">Confirm Password does not match with password.</span>
