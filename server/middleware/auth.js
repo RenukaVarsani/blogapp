@@ -5,9 +5,11 @@ const auth = async (req, res, next) => {
 
   try {
     const token = req.headers.authorization.split(" ")[1];
+
     if(isTokenExpired(token) ===  true){
       return res.status(419).send()
     }
+    
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN);
     const user = await User.findOne({
       _id: decoded._id

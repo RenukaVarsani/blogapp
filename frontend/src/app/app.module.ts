@@ -21,10 +21,11 @@ import { BlogdataComponent } from './blogdata/blogdata.component';
 import { RequestResetComponent } from './request-reset/request-reset.component';
 import { ResponseResetComponent } from './response-reset/response-reset.component';
 import { UserdataComponent } from './userdata/userdata.component';
-import { ErrorInterceptor } from './error.interceptor';
+import { ErrorInterceptor } from '../interceptor/error.interceptor';
+import { AuthInterceptor } from '../interceptor/auth.interceptor';
+import { RefreshInterceptor } from '../interceptor/refresh.interceptor';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
-import { AuthInterceptor } from './auth.interceptor';
-import { RefreshInterceptor } from './refresh.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,8 @@ import { RefreshInterceptor } from './refresh.interceptor';
     RequestResetComponent,
     ResponseResetComponent,
     UserdataComponent,
+    LoadingSpinnerComponent
+
   ],
   imports: [
     BrowserModule,

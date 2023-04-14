@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from './../../services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StorageService } from '../../services/storage.service';
 import { AuthService } from './../../services/auth.service';
 import {
   FormGroup,

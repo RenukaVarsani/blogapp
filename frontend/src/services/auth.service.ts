@@ -25,6 +25,7 @@ export class AuthService  {
   isAdmin1: boolean = false;
   isLogin1 : boolean = false;
   isWriter1 : boolean=false;
+  isLoading:boolean = false;
 
   constructor(private http: HttpClient, private router: Router,  private Toast:ToastrService) {}
 
@@ -57,9 +58,7 @@ export class AuthService  {
       this.isAdmin1 = false;
       this.isLogin1 = false;
       this.isWriter1 =false;
-
     }
-
   }
 
   getToken() {
@@ -67,12 +66,10 @@ export class AuthService  {
   }
 
   getAccessToken(){
-    //console.log("in api")
+
       const refreshToken = localStorage.getItem('refreshToken')
-      const data = {
-        refreshToken
-      }
-    // let input = {  "token" : this.getRefresh()}
+      const data = {  refreshToken }
+
     return this.http.post(AUTH_API + '/token' , data)
 
   }
@@ -93,18 +90,18 @@ export class AuthService  {
           this.refreshToken = refreshToken;
           this.token = token;
           if (token) {
-
             this.user = response.user;
-
             this.saveAuthData(token, this.user , refreshToken);
             this.isAdmin()
             this.Toast.info('','You are login!' ,{
               timeOut: 1000,
             });
+            this.isLoading = true;
             this.router.navigate(['/home']);
           }
         },
         (error) => {
+          this.isLoading = false;
           console.log(error);
         }
       );
@@ -126,9 +123,11 @@ export class AuthService  {
           this.Toast.info('','You are Registered!' ,{
             timeOut: 1000,
           });
+          this.isLoading = true;
           this.router.navigate(['/home']);
         },
         (error) => {
+          this.isLoading = false;
           console.log(error);
         }
       );
