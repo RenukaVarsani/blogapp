@@ -1,6 +1,6 @@
 /* #demo{
   /* Created with https://www.css-gradient.com */
-  /* background: #555756;
+/* background: #555756;
   background: -webkit-linear-gradient(top left, #555756, #93958E);
   background: -moz-linear-gradient(top left, #555756, #93958E);
   background: linear-gradient(to bottom right, #555756, #93958E);
@@ -8,56 +8,74 @@
 
   #edit{
     /* Created with https://www.css-gradient.com */
-  /* background: #010101;
+/* background: #010101;
   background: -webkit-linear-gradient(top left, #010101, #595A58);
   background: -moz-linear-gradient(top left, #010101, #595A58);
   background: linear-gradient(to bottom right, #010101, #595A58);
   } */
 
-  /* #delete{
+/* #delete{
 
       /* Created with https://www.css-gradient.com */
-      /* background: #CCD4CE;
+/* background: #CCD4CE;
       background: -webkit-linear-gradient(top left, #CCD4CE, #FF2307);
       background: -moz-linear-gradient(top left, #CCD4CE, #FF2307);
       background: linear-gradient(to bottom right, #CCD4CE, #FF2307); }*/
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 
- @import  url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-   *, *:before, *:after {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
-   }
+body {
+  font-family: "Open Sans", sans-serif;
+}
 
-   body {
-     font-family: 'Open Sans', sans-serif;
-   }
+th {
+  border-bottom: 1px solid #364043;
+  color: #434b54;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: left;
+  height: 8vh;
+}
+td {
+  color: #fff;
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
 
-   th {
-     border-bottom: 1px solid #364043;
-     color: #434B54;
-     font-weight: 600;
-     padding: 0.5em 1em;
-     text-align: left;
-height: 8vh;
-   }
-   td {
-     color: #fff;
-     font-weight: 400;
-     padding: 0.65em 1em;
-   }
+tbody tr {
+  transition: background 0.25s ease;
+}
+tbody tr:hover {
+  background: #d6d07a;
+}
 
+th {
+  background-color: #d6d07a;
+}
 
-  tbody tr {
-    transition: background 0.25s ease;
-  }
-  tbody tr:hover {
-    background:   #D6D07A;
-  }
+.modal {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background-color: #ffffff;
+  padding: 20px;
+  top: 41vh;
+}
 
+.modal-header .btn-close {
+  padding: 5vh;
+}
 
-    th {
-       background-color: #D6D07A;
-    }
+.buttonn{
+  background: #D6D07A
+};

@@ -1,10 +1,3 @@
-#user {
-  margin-right: 63vh;
-}
-
-#email {
-  margin-right: 68vh;
-}
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 
@@ -13,7 +6,7 @@
 *:after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+
 }
 
 body {
@@ -44,3 +37,26 @@ tbody tr:hover {
 th {
   background-color: #d6d07a;
 }
+
+.modal{
+  position: absolute;
+  left: 50%;
+ transform: translate(-50%, -50%);
+ width: 500px;
+ height: 300px;
+ background-color: #ffffff;
+ padding: 20px;
+top: 31vh ;
+}
+
+.modal-header .btn-close {
+ padding: 2vh;
+}
+
+#user{
+  margin-right: 63vh;
+}
+
+.button{
+  background: #D6D07A
+};
