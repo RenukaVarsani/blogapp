@@ -77,7 +77,7 @@ exports.createUser = async (req, res) => {
   try {
 
     await user.save()
-    const token = await user.genrateAuthToken()
+    const token = await user.genrateAccessAuthToken()
     res.status(201).send({ user, token })
 
   } catch (e) {
