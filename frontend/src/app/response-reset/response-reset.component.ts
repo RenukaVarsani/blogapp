@@ -27,14 +27,23 @@ export class ResponseResetComponent {
 
     this.route.params.subscribe(params => {
       this.resetToken = params['token'];
-      console.log(this.resetToken);
+      //console.log(this.resetToken);
       this.VerifyToken(this.resetToken);
     });
   }
 
 
   ngOnInit() {
-    this.Init();
+
+      this.ResponseResetForm = this.fb.group(
+        {
+          resettoken: [this.resetToken],
+          newPassword: ['', [Validators.required, Validators.minLength(7)]],
+          confirmPassword: ['', [Validators.required, Validators.minLength(7)]]
+
+        }
+      );
+
 
   }
 
@@ -54,16 +63,7 @@ export class ResponseResetComponent {
     )
   }
 
-  Init() {
-    this.ResponseResetForm = this.fb.group(
-      {
-        resettoken: [this.resetToken],
-        newPassword: ['', [Validators.required, Validators.minLength(7)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(7)]]
 
-      }
-    );
-  }
 
   Validate(passwordFormGroup: FormGroup) {
     const new_password = passwordFormGroup.controls['newPassword'].value;
@@ -85,9 +85,12 @@ export class ResponseResetComponent {
   ResetPassword(form:any) {
     if (form.valid) {
       this.IsResetFormValid = true;
+      console.log(this.ResponseResetForm.value);
+   const data =    this.ResponseResetForm.value
+
       this.userService.newPassword(this.ResponseResetForm.value,this.resetToken).subscribe(
         res => {
-          console.log(res);
+          //console.log(res);
           this.Toast.info('','Password Updated' ,{
             timeOut: 1000,
           });
