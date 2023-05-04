@@ -29,6 +29,7 @@ exports.getBlogs = async (req, res) => {
 };
 
 exports.getBlogById = async (req, res) => {
+  
   const _id = req.params.id;
 
   try {

@@ -1,20 +1,19 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const blog =  mongoose.model('Blog',{
+const blog = mongoose.model("Blog", {
 
-    name: {
-        type: String,
-       
-    },
-    description: {
-        type: String,
-       
-    },
-    image:{
-        type:String,
-        
-    }   
+  name: {
+    type: String,
+  },
 
-})
+  description: {
+    type: String,
+  },
 
-module.exports = blog
+  image: {
+    type: String,
+  },
+  
+});
+
+module.exports = blog;

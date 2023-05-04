@@ -21,9 +21,7 @@ exports.getRefreshToken = async (req, res) => {
 
     let refreshToken = req.body;
     const decoded = jwt.verify(refreshToken.refreshToken, process.env.REFRESH_TOKEN)
-    const user = await User.findOne({
-      _id: decoded._id
-    });
+    const user = await User.findOne({  _id: decoded._id});
 
     const token = await user.genrateAccessAuthToken()
     res.json({
@@ -45,11 +43,10 @@ exports.login = async (req, res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password)
     const token = await user.genrateAccessAuthToken()
-    console.log(token);
     const refreshToken = await user.genrateRefreshAuthToken()
-    console.log(refreshToken);
     res.send({ user, token, refreshToken })
-  } catch (e) {
+  }
+  catch (e) {
     console.log(e);
     res.status(500).send()
   }
@@ -70,10 +67,10 @@ exports.logout = async (req, res) => {
 
 exports.createUser = async (req, res) => {
 
-  console.log(req.body);
+ // console.log(req.body);
 
   const user = new User(req.body)
-  console.log(user);
+  //console.log(user);
   try {
 
     await user.save()
@@ -111,8 +108,8 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
 
   try {
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
     const user = await User.findByIdAndUpdate(req.params.id, req.body)
     res.status(200).send(user)
   } catch (e) {
@@ -122,7 +119,7 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     const user = await User.findByIdAndDelete(req.params.id)
     res.status(200).send(user)
   } catch (e) {
@@ -175,8 +172,8 @@ exports.postReset = async (req, res) => {
 }
 
 exports.getUserById = async (req, res) => {
-  const _id = req.params.id
 
+  const _id = req.params.id
   try {
     const user = await User.findOne({ _id })
     if (!user) {
@@ -190,11 +187,11 @@ exports.getUserById = async (req, res) => {
 
 
 exports.verifyToken = async (req, res) => {
+
   const token = req.params.token;
 
   try {
     const user = await User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
-
     res.status(200).send(user)
   } catch (error) {
     res.status(404).send(err)
@@ -205,7 +202,7 @@ exports.verifyToken = async (req, res) => {
 
 exports.postNewPassword = async (req, res) => {
   try {
-    console.log(req.body);
+    //console.log(req.body);
     const newPassword = req.body.newPassword;
     const passwordToken = req.body.resettoken;
     const hashPasssword = await bcrypt.hash(newPassword, 8)
@@ -219,7 +216,7 @@ exports.postNewPassword = async (req, res) => {
         },
       }
     );
-    console.log(UpdatedUser);
+   // console.log(UpdatedUser);
   } catch (error) {
     console.log(error);
   }

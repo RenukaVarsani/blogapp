@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs')
 
 
 const userSchema = new mongoose.Schema({
+
     username: {
         type: String,
         required: true,
@@ -30,11 +31,10 @@ const userSchema = new mongoose.Schema({
     resetToken:{
         type:String
     },
+
     resetTokenExpiration:{
         type:String
     },
-
-   
 
     password: {
         type: String,   
@@ -56,7 +56,6 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.genrateAccessAuthToken = async function(){
     const user = this 
     const token = jwt.sign({_id: user._id.toString()} , process.env.ACCESS_TOKEN  , {expiresIn:"10s"})
-   // await user.save()
     return token;
 }
 
@@ -64,8 +63,6 @@ userSchema.methods.genrateRefreshAuthToken = async function(){
     
     const user = this 
     const RefreshToken = jwt.sign({_id: user._id.toString()} , process.env.REFRESH_TOKEN)
-   // user.refreshToken = this.refreshToken
-   // await user.save()
     return RefreshToken;
 }
 
